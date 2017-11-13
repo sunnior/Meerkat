@@ -9,8 +9,8 @@ namespace Meerkat
 	class LinearLayer : public Layer
 	{
 	public:
-		LinearLayer(dl_uint32 input_num, dl_uint32 output_num);
-
+		LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num);
+		~LinearLayer();
 	private:
 		Tensor* m_weight{ nullptr };
 		Tensor* m_bias{ nullptr };

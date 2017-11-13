@@ -9,5 +9,17 @@ namespace Meerkat
 #else
 #error "unkown platform!"
 #endif
+
+#define DL_PANIC_ON_FAIL(exp, msg)
+
+#define DL_NEW(T) new T
+#define DL_SAFE_DELETE(p) delete p; \
+						  p = nullptr;
+
+	enum ComputeType
+	{
+		ComputeType_CPU,
+		ComputeType_GPU,
+	};
 }
 #endif

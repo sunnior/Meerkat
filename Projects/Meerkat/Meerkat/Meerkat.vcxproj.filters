@@ -8,5 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Tensor.cpp" />
   </ItemGroup>
 </Project>
