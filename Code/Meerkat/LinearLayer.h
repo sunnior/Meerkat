@@ -12,7 +12,7 @@ namespace Meerkat
 		LinearLayer(dl_uint32 input_num, dl_uint32 output_num);
 		~LinearLayer();
 
-		void InitData(ComputeType type);
+		void Alloc(ComputeType type);
 		void Forward(Tensor* input, Tensor* output)
 		{
 			(m_compute_type == ComputeType_CPU) ? _ForwardCpu(input, output) : _ForwardGpu(input, output);

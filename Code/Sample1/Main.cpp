@@ -11,7 +11,7 @@ int main()
 	input->Zeros();
 
 	LinearLayer* linear_layer = DL_NEW(LinearLayer)(2, 1);
-	linear_layer->InitData(ComputeType_CPU);
+	linear_layer->Alloc(ComputeType_CPU);
 	linear_layer->Forward(input, output);
 
 	
