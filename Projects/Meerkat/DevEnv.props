@@ -3,12 +3,16 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <OutputDir>..\..\..\Output</OutputDir>
+    <CodeDir>..\..\..\Code</CodeDir>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
     <BuildMacro Include="OutputDir">
       <Value>$(OutputDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CodeDir">
+      <Value>$(CodeDir)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

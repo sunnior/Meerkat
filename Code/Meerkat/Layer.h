@@ -8,11 +8,6 @@ namespace Meerkat
 	class Layer
 	{
 	public:
-		Layer(ComputeType type)
-			: m_compute_type(type)
-		{};
-
-
 		virtual ~Layer() {};
 
 	protected:

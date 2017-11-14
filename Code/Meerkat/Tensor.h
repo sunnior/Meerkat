@@ -1,6 +1,7 @@
 #ifndef __MEERKAT_TENSOR_H__
 #define __MEERKAT_TENSOR_H__
 
+#include <initializer_list>
 #include "Platform.h"
 
 namespace Meerkat
@@ -8,10 +9,10 @@ namespace Meerkat
 	class Tensor
 	{
 	public:
-		Tensor(dl_uint32* shape, dl_uint32 dimension);
+		Tensor(std::initializer_list<dl_uint32> shape);
 
 		void Alloc(ComputeType type);
-
+		void Zeros();
 	private:
 		static const dl_uint32 s_max_dimension = 8;
 

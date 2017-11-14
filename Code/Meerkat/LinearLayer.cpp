@@ -2,20 +2,10 @@
 
 namespace Meerkat
 {
-	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
-		: Layer(type)
+	LinearLayer::LinearLayer(dl_uint32 input_num, dl_uint32 output_num)
 	{
-		dl_uint32 weight_shape[2];
-		weight_shape[0] = input_num;
-		weight_shape[1] = output_num;
-
-		m_weight = DL_NEW(Tensor)(weight_shape, 2);
-		m_weight->Alloc(m_compute_type);
-
-		dl_uint32 bias_shape = output_num;
-
-		m_bias = DL_NEW(Tensor)(&bias_shape, 1);
-		m_bias->Alloc(m_compute_type);
+		m_weight = DL_NEW(Tensor){input_num, output_num};
+		m_bias = DL_NEW(Tensor){output_num};
 	}
 
 	LinearLayer::~LinearLayer()
@@ -23,4 +13,22 @@ namespace Meerkat
 		DL_SAFE_DELETE(m_weight);
 		DL_SAFE_DELETE(m_bias);
 	}
+
+	void LinearLayer::InitData(ComputeType type)
+	{
+		m_weight->Alloc(m_compute_type);
+		m_bias->Alloc(m_compute_type);
+	}
+
+	void LinearLayer::_ForwardCpu(Tensor* input, Tensor* output)
+	{
+		TODO("check dimension");
+
+	}
+
+	void LinearLayer::_ForwardGpu(Tensor* input, Tensor* output)
+	{
+
+	}
+
 }

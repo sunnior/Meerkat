@@ -12,6 +12,8 @@ namespace Meerkat
 
 #define DL_PANIC_ON_FAIL(exp, msg)
 
+#define TODO(msg)
+
 #define DL_NEW(T) new T
 #define DL_SAFE_DELETE(p) delete p; \
 						  p = nullptr;
