@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Meerkat", "Meerkat\Meerkat.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample1", "Sample1\Sample1.vcxproj", "{884D228E-6783-41CD-99E9-FFD1CB9A9372}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cblas", "Cblas\Cblas.vcxproj", "{D7550677-2372-4511-8E36-F6B0EC61388E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -29,14 +27,6 @@ Global
 		{884D228E-6783-41CD-99E9-FFD1CB9A9372}.Release|x64.ActiveCfg = Release|x64
 		{884D228E-6783-41CD-99E9-FFD1CB9A9372}.Release|x64.Build.0 = Release|x64
 		{884D228E-6783-41CD-99E9-FFD1CB9A9372}.Release|x86.ActiveCfg = Release|x64
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Debug|x64.ActiveCfg = Debug|x64
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Debug|x64.Build.0 = Debug|x64
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Debug|x86.ActiveCfg = Debug|Win32
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Debug|x86.Build.0 = Debug|Win32
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Release|x64.ActiveCfg = Release|x64
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Release|x64.Build.0 = Release|x64
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Release|x86.ActiveCfg = Release|Win32
-		{D7550677-2372-4511-8E36-F6B0EC61388E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
