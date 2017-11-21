@@ -1,9 +1,12 @@
+#include <Windows.h>
 #include "LinearLayer.h"
 
 using namespace Meerkat;
 
 int main()
 {
+	HINSTANCE hDLL = LoadLibrary("libopenblas.dll");
+
 	Tensor* input = DL_NEW(Tensor) { 2 };
 	Tensor* output = DL_NEW(Tensor) { 1 };
 	input->Alloc(ComputeType_CPU);

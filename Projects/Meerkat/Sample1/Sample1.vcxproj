@@ -44,7 +44,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(OutputDir)\$(Platform)\$(Configuration)\Libs\</OutDir>
+    <OutDir>$(OutputDir)\$(Platform)\$(Configuration)\Bin\</OutDir>
     <IntDir>$(OutputDir)\$(Platform)\$(Configuration)\Intermediate\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
