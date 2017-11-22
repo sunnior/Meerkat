@@ -2,7 +2,6 @@
 #define __MEERKAT_LINEARLAYER_H__
 
 #include "Layer.h"
-#include "Tensor.h"
 
 namespace Meerkat
 {
@@ -13,10 +12,6 @@ namespace Meerkat
 		~LinearLayer();
 
 		void Alloc(ComputeType type);
-		void Forward(Tensor* input, Tensor* output)
-		{
-			(m_compute_type == ComputeType_CPU) ? _ForwardCpu(input, output) : _ForwardGpu(input, output);
-		}
 	private:
 		void _ForwardCpu(Tensor* input, Tensor* output);
 		void _ForwardGpu(Tensor* input, Tensor* output);

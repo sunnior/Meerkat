@@ -2,6 +2,7 @@
 #define __MEERKAT_LAYER_H__
 
 #include "Platform.h"
+#include "Tensor.h"
 
 namespace Meerkat
 {
@@ -10,8 +11,14 @@ namespace Meerkat
 	public:
 		virtual ~Layer() {};
 
+		void Forward(ComputeType type, Tensor* input, Tensor* output)
+		{
+			(type == ComputeType_CPU) ? _ForwardCpu(input, output) : _ForwardGpu(input, output);
+		}
+
 	protected:
-		ComputeType m_compute_type{ ComputeType_CPU };
+		virtual void _ForwardGpu(Tensor* input, Tensor* output) = 0;
+		virtual void _ForwardCpu(Tensor* input, Tensor* output) = 0;
 	};
 }
 #endif

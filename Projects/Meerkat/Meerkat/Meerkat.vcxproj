@@ -56,6 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -72,13 +73,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Meerkat\Blas.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\LinearLayer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Meerkat.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Platform.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Tensor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Meerkat\Blas.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Meerkat.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Tensor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

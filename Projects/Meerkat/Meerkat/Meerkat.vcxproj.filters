@@ -5,9 +5,13 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Platform.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\LinearLayer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Meerkat.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Blas.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Tensor.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Meerkat.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Blas.cpp" />
   </ItemGroup>
 </Project>

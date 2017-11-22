@@ -16,8 +16,8 @@ namespace Meerkat
 
 	void LinearLayer::Alloc(ComputeType type)
 	{
-		m_weight->Alloc(m_compute_type);
-		m_bias->Alloc(m_compute_type);
+		m_weight->Alloc(type);
+		m_bias->Alloc(type);
 		TODO("way to init");
 		m_weight->Zeros();
 		m_bias->Zeros();
