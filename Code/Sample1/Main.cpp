@@ -8,8 +8,8 @@ int main()
 {
 	Meerkat::Init();
 
-	Tensor* input = DL_NEW(Tensor) { 2 };
-	Tensor* output = DL_NEW(Tensor) { 1 };
+	Tensor* input = DL_NEW(Tensor) { 1, 2 };
+	Tensor* output = DL_NEW(Tensor) { 1, 1 };
 	input->Alloc(ComputeType_CPU);
 	output->Alloc(ComputeType_CPU);
 	input->Zeros();
