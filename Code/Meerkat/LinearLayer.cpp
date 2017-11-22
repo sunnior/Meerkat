@@ -44,7 +44,8 @@ namespace Meerkat
 		weight_data[0] = 2.0f;
 		weight_data[1] = 3.0f;
 		
-		cblas_sgemm_ptr(CblasRowMajor, CblasNoTrans, CblasTrans,
+
+		dl_gemm<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans,
 			m_size, n_size, k_size,
 			1.0f, input_data, k_size,
 			weight_data, k_size,
