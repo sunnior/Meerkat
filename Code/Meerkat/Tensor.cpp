@@ -1,6 +1,6 @@
 #include "Tensor.h"
 
-namespace Meerkat
+namespace DeepLearning
 {
 
 	Tensor::Tensor(std::initializer_list<dl_uint32> shape)

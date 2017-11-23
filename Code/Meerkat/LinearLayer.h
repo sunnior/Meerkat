@@ -3,7 +3,7 @@
 
 #include "Layer.h"
 
-namespace Meerkat
+namespace DeepLearning
 {
 	class LinearLayer : public Layer
 	{

@@ -1,7 +1,7 @@
 #include "Blas.h"
 #include <Windows.h>
 
-namespace Meerkat
+namespace DeepLearning
 {
 	cblas_sgemm_type cblas_sgemm_ptr;
 

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <cstring>
 
-namespace Meerkat
+namespace DeepLearning
 {
 #if defined(_MSC_VER)
 	typedef float			dl_tensor;

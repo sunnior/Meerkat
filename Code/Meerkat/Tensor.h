@@ -4,7 +4,7 @@
 #include <initializer_list>
 #include "Platform.h"
 
-namespace Meerkat
+namespace DeepLearning
 {
 	class Tensor
 	{

@@ -2,11 +2,11 @@
 #include "LinearLayer.h"
 #include "Meerkat.h"
 
-using namespace Meerkat;
+using namespace DeepLearning;
 
 int main()
 {
-	Meerkat::Init();
+	DeepLearning::Init();
 
 	Tensor* input = DL_NEW(Tensor) { 1, 2 };
 	Tensor* output = DL_NEW(Tensor) { 1, 1 };

@@ -4,7 +4,7 @@
 #include "Platform.h"
 #include "Tensor.h"
 
-namespace Meerkat
+namespace DeepLearning
 {
 	class Layer
 	{

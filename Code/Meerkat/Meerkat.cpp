@@ -1,7 +1,7 @@
 #include "Meerkat.h"
 #include "Blas.h"
 
-namespace Meerkat
+namespace DeepLearning
 {
 	void Init()
 	{
