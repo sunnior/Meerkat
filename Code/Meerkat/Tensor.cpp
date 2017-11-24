@@ -27,4 +27,11 @@ namespace DeepLearning
 		std::memset(m_cpu_data, 0, sizeof(dl_tensor)*m_size);
 	}
 
+	void Tensor::LoadData(ComputeType type, dl_tensor* pData)
+	{
+		if (type == ComputeType_CPU)
+		{
+			std::memcpy(m_cpu_data, pData, m_size*sizeof(dl_tensor));
+		}
+	}
 }

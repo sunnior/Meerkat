@@ -56,7 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(CodeDir)\UnitTest++</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CodeDir)\UnitTest++;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -66,7 +66,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(CodeDir)\UnitTest++</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CodeDir)\UnitTest++;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -75,11 +75,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\TestRunner\Main.cpp" />
+    <ClCompile Include="..\..\..\Code\TestRunner\Test_LinearLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Meerkat\Meerkat.vcxproj">
+      <Project>{c5d4afc6-267e-48c5-bc90-c40f6bb511ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\UnitTest++\UnitTest++.vcxproj">
       <Project>{0e71457f-e411-415e-9eeb-6643e654fc80}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\TestRunner\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

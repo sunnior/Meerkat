@@ -12,6 +12,9 @@ namespace DeepLearning
 		~LinearLayer();
 
 		void Alloc(ComputeType type);
+		Tensor* GetWeight() { return m_weight; }
+		Tensor* GetBias() { return m_bias; }
+
 	private:
 		void _ForwardCpu(Tensor* input, Tensor* output);
 		void _ForwardGpu(Tensor* input, Tensor* output);

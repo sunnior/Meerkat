@@ -2,5 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\TestRunner\Main.cpp" />
+    <ClCompile Include="..\..\..\Code\TestRunner\Test_LinearLayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\TestRunner\Util.h" />
   </ItemGroup>
 </Project>

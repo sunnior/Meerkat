@@ -39,12 +39,6 @@ namespace DeepLearning
 		dl_tensor* weight_data = m_weight->GetCpuData();
 		dl_tensor* bias_data = m_bias->GetCpuData();
 
-		input_data[0] = 1.0f;
-		input_data[1] = 2.0f;
-		weight_data[0] = 2.0f;
-		weight_data[1] = 3.0f;
-		bias_data[0] = 0.5;
-
 		dl_memcpy_cpu<dl_tensor>(output_data, bias_data, n_size, m_size);
 
 		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans,
