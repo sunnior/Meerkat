@@ -7,6 +7,7 @@
     <ClInclude Include="..\..\..\Code\Meerkat\LinearLayer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Meerkat.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Blas.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />

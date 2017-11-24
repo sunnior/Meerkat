@@ -24,7 +24,7 @@ namespace DeepLearning
 		m_bias->Zeros();
 	}
 
-	void LinearLayer::_ForwardCpu(Tensor* input, Tensor* output)
+	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
 	{
 		TODO("check dimension");
 		output->Zeros();
@@ -34,7 +34,7 @@ namespace DeepLearning
 		dl_uint32 n_size = output->GetShape(1);
 
 
-		dl_tensor* input_data = input->GetCpuData();
+		const dl_tensor* input_data = input->GetCpuData();
 		dl_tensor* output_data = output->GetCpuData();
 		dl_tensor* weight_data = m_weight->GetCpuData();
 		dl_tensor* bias_data = m_bias->GetCpuData();
@@ -50,7 +50,7 @@ namespace DeepLearning
 
 	}
 
-	void LinearLayer::_ForwardGpu(Tensor* input, Tensor* output)
+	void LinearLayer::_ForwardGpu(const Tensor* input, Tensor* output)
 	{
 
 	}

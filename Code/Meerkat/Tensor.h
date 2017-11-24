@@ -13,9 +13,10 @@ namespace DeepLearning
 
 		void Alloc(ComputeType type);
 		void Zeros();
-		dl_uint32 GetShape(dl_uint32 idx) { return m_shape[idx]; }
+		dl_uint32 GetShape(dl_uint32 idx) const { return m_shape[idx]; }
 		dl_tensor* GetCpuData() { return m_cpu_data; }
-		dl_size GetSize() { return m_size; }
+		const dl_tensor* GetCpuData() const { return m_cpu_data; }
+		dl_size GetSize() const { return m_size; }
 		void LoadData(ComputeType type, dl_tensor* pData);
 	private:
 		static const dl_uint32 s_max_dimension = 8;

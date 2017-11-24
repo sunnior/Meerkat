@@ -16,8 +16,8 @@ namespace DeepLearning
 		Tensor* GetBias() { return m_bias; }
 
 	private:
-		void _ForwardCpu(Tensor* input, Tensor* output);
-		void _ForwardGpu(Tensor* input, Tensor* output);
+		void _ForwardCpu(const Tensor* input, Tensor* output);
+		void _ForwardGpu(const Tensor* input, Tensor* output);
 	private:
 		Tensor* m_weight{ nullptr };
 		Tensor* m_bias{ nullptr };
