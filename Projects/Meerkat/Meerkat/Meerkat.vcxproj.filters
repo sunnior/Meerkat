@@ -1,18 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Meerkat\Tensor.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Platform.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Layer.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\LinearLayer.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Meerkat.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Blas.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Criterion.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Layers\LinearLayer.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.h">
+      <Filter>Criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\Criterion.h">
+      <Filter>Criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Meerkat.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Platform.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Tensor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Blas.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Tensor.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Meerkat.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Blas.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
+      <Filter>Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.cpp">
+      <Filter>Criterions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Blas.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Layers">
+      <UniqueIdentifier>{ecaa48d4-5724-4cbf-861d-d91c4fc1c826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Criterions">
+      <UniqueIdentifier>{39e43562-9f97-43f4-a885-8a99a42c93d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{bc006466-3ae9-466d-a55e-cda35fb59bab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

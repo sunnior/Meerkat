@@ -1,5 +1,5 @@
 #include "LinearLayer.h"
-#include "Blas.h"
+#include "Common/Blas.h"
 
 namespace DeepLearning
 {

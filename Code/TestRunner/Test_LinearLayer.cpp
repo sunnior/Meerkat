@@ -1,5 +1,5 @@
 #include "UnitTest++.h"
-#include "LinearLayer.h"
+#include "Layers/LinearLayer.h"
 #include "Util.h"
 
 

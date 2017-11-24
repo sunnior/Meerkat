@@ -1,8 +1,8 @@
 #ifndef __MEERKAT_LAYER_H__
 #define __MEERKAT_LAYER_H__
 
-#include "Platform.h"
-#include "Tensor.h"
+#include "Common/Platform.h"
+#include "Common/Tensor.h"
 
 namespace DeepLearning
 {

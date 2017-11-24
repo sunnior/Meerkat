@@ -56,7 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -66,6 +66,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -73,19 +74,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Meerkat\Blas.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Criterion.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Layer.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\LinearLayer.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Meerkat.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Platform.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Tensor.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Blas.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Meerkat.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Platform.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Common\Tensor.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\Criterion.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Layers\LinearLayer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Meerkat\Blas.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\LinearLayer.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Meerkat.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Tensor.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Blas.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

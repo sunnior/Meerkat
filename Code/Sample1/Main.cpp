@@ -1,6 +1,6 @@
 #include <Windows.h>
-#include "LinearLayer.h"
-#include "Meerkat.h"
+#include "Layers/LinearLayer.h"
+#include "Common/Meerkat.h"
 
 using namespace DeepLearning;
 

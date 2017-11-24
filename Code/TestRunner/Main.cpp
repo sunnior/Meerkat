@@ -1,5 +1,5 @@
 #include "UnitTestPP.h"
-#include "Meerkat.h"
+#include "Common/Meerkat.h"
 
 int main()
 {
