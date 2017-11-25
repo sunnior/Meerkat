@@ -19,6 +19,7 @@ namespace DeepLearning
 #define TODO(msg)
 
 #define DL_NEW(T) new T
+
 #define DL_CPU_ALLOC(s) malloc(s)
 
 #define DL_SAFE_DELETE(p) delete p; \

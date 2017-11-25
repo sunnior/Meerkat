@@ -11,7 +11,7 @@ namespace DeepLearning
 
 {
 
-	bool dl_check_cpumem_close(Tensor* pA, Tensor* pB)
+	inline bool dl_check_cpumem_close(Tensor* pA, Tensor* pB)
 
 	{
 

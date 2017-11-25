@@ -7,9 +7,6 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h">
       <Filter>Layers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.h">
-      <Filter>Criterions</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\Criterion.h">
       <Filter>Criterions</Filter>
     </ClInclude>
@@ -25,13 +22,13 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Blas.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.h">
+      <Filter>Criterions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
       <Filter>Layers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.cpp">
-      <Filter>Criterions</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp">
       <Filter>Common</Filter>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.cpp">
+      <Filter>Criterions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,12 +14,49 @@ namespace DeepLearning
 		const T alpha, const T *A, const blasint lda, const T *B, const blasint ldb, const T beta, T *C, const blasint ldc);
 
 	template<>
-	inline
-	void dl_gemm_cpu<float>(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_TRANSPOSE TransB, const blasint M, const blasint N, const blasint K,
-		const float alpha, const float *A, const blasint lda, const float *B, const blasint ldb, const float beta, float *C, const blasint ldc)
+	inline void dl_gemm_cpu<float>(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_TRANSPOSE TransB, const blasint M, const blasint N, const blasint K,
+			const float alpha, const float *A, const blasint lda, const float *B, const blasint ldb, const float beta, float *C, const blasint ldc)
 	{
 		cblas_sgemm_ptr(Order, TransA, TransB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
 	}
+
+	typedef void (*cblas_saxpy_type)(OPENBLAS_CONST blasint n, OPENBLAS_CONST float alpha, OPENBLAS_CONST float *x, OPENBLAS_CONST blasint incx, float *y, OPENBLAS_CONST blasint incy);
+	extern cblas_saxpy_type cblas_saxpy_ptr;
+
+	template<typename T>
+	void dl_axpy_cpu(const blasint n, const T alpha, const T *x, const blasint incx, T *y, const blasint incy);
+
+	template<>
+	inline void dl_axpy_cpu<float>(const blasint n, const float alpha, const float *x, const blasint incx, float *y, const blasint incy)
+	{
+		cblas_saxpy_ptr(n, alpha, x, incx, y, incy);
+	}
+
+
+	typedef void (*cblas_scopy_type)(OPENBLAS_CONST blasint n, OPENBLAS_CONST float *x, OPENBLAS_CONST blasint incx, float *y, OPENBLAS_CONST blasint incy);
+	extern cblas_scopy_type cblas_scopy_ptr;
+
+	template<typename T>
+	void dl_copy_cpu(const blasint n, const T *x, const blasint incx, T *y, const blasint incy);
+
+	template<>
+	inline void dl_copy_cpu<float>(const blasint n, const float *x, const blasint incx, float *y, const blasint incy)
+	{
+		cblas_scopy_ptr(n, x, incx, y, incy);
+	}
+
+	typedef float (*cblas_sdot_type)(OPENBLAS_CONST blasint n, OPENBLAS_CONST float  *x, OPENBLAS_CONST blasint incx, OPENBLAS_CONST float  *y, OPENBLAS_CONST blasint incy);
+	extern cblas_sdot_type cblas_sdot_ptr;
+
+	template<typename T>
+	T dl_dot_cpu(const blasint n, const T *x, const blasint incx, const T *y, const blasint incy);
+
+	template<>
+	inline float dl_dot_cpu<float>(const blasint n, const float *x, const blasint incx, const float *y, const blasint incy)
+	{
+		return cblas_sdot_ptr(n, x, incx, y, incy);
+	}
+
 
 	template<typename T>
 	void dl_memcpy_cpu(T* dest, const T* src, const blasint size, const blasint repeat)

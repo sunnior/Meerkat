@@ -8,8 +8,17 @@ namespace DeepLearning
 	class Criterion
 	{
 	public:
-		TODO("if output is a single scalar, use dl_tensor is enough");
-		virtual void Forward(const Tensor* input, const Tensor* target, Tensor* output) = 0;
+		virtual ~Criterion() {};
+
+		void Forward(ComputeType type, const Tensor* input, const Tensor* target, dl_tensor* output)
+		{
+			(type == ComputeType_CPU) ? _ForwardCpu(input, target, output) : _ForwardGpu(input, target, output);
+		}
+
+	protected:
+		virtual void _ForwardCpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
+		virtual void _ForwardGpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
+
 	};
 }
 

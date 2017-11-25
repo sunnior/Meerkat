@@ -79,7 +79,7 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Platform.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Tensor.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\Criterion.h" />
-    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\LinearLayer.h" />
   </ItemGroup>
@@ -87,7 +87,7 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Blas.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp" />
-    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MinSquareErrorCriterion.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
