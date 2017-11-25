@@ -9,19 +9,23 @@ namespace DeepLearning
 	class Tensor
 	{
 	public:
-		Tensor(std::initializer_list<dl_uint32> shape);
+		Tensor(ComputeType type, std::initializer_list<dl_uint32> shape);
 
-		void Alloc(ComputeType type);
 		void Zeros();
 		dl_uint32 GetShape(dl_uint32 idx) const { return m_shape[idx]; }
 		dl_tensor* GetCpuData() { return m_cpu_data; }
 		const dl_tensor* GetCpuData() const { return m_cpu_data; }
 		dl_size GetSize() const { return m_size; }
-		void LoadData(ComputeType type, dl_tensor* pData);
+		void LoadData(dl_tensor* pData);
+
+	private:
+		void _Alloc(ComputeType type);
 	private:
 		static const dl_uint32 s_max_dimension = 8;
 
 	private:
+		ComputeType m_type;
+
 		dl_tensor* m_cpu_data{ nullptr };
 		dl_tensor* m_gpu_data{ nullptr };
 

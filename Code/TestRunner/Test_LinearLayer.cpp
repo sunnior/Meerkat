@@ -15,23 +15,18 @@ TEST(LinearLayer)
 	dl_tensor bias_value[2] = { 0.33f, 0.43f };
 	dl_tensor target_value[2][2] = { { 3.33f, 21.13f },{ 30.33f, 207.43f } };
 
-	Tensor* input = DL_NEW(Tensor) { 2, 4 };
-	Tensor* output = DL_NEW(Tensor) { 2, 2 };
-	Tensor* target = DL_NEW(Tensor) { 2, 2 };
-	LinearLayer* linear_layer = DL_NEW(LinearLayer)(4, 2);
+	Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
+	Tensor* output = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });
+	Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });
+	LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, 4, 2);
 
-	input->Alloc(ComputeType_CPU);
-	output->Alloc(ComputeType_CPU);
-	target->Alloc(ComputeType_CPU);
+	input->LoadData((dl_tensor*)input_value);
+	target->LoadData((dl_tensor*)target_value);
 
-	input->LoadData(ComputeType_CPU, (dl_tensor*)input_value);
-	target->LoadData(ComputeType_CPU, (dl_tensor*)target_value);
+	linear_layer->GetWeight()->LoadData((dl_tensor*)weight_value);
+	linear_layer->GetBias()->LoadData((dl_tensor*)bias_value);
 
-	linear_layer->Alloc(ComputeType_CPU);
-	linear_layer->GetWeight()->LoadData(ComputeType_CPU, (dl_tensor*)weight_value);
-	linear_layer->GetBias()->LoadData(ComputeType_CPU ,(dl_tensor*)bias_value);
-
-	linear_layer->Forward(ComputeType_CPU, input, output);
+	linear_layer->Forward(input, output);
 
 	CHECK(dl_check_cpumem_close(target, output));
 

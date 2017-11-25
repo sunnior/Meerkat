@@ -8,17 +8,23 @@ namespace DeepLearning
 	class Criterion
 	{
 	public:
+		Criterion(ComputeType type)
+			: m_type(type)
+		{};
+
 		virtual ~Criterion() {};
 
-		void Forward(ComputeType type, const Tensor* input, const Tensor* target, dl_tensor* output)
+		void Forward(const Tensor* input, const Tensor* target, dl_tensor* output)
 		{
-			(type == ComputeType_CPU) ? _ForwardCpu(input, target, output) : _ForwardGpu(input, target, output);
+			(m_type == ComputeType_CPU) ? _ForwardCpu(input, target, output) : _ForwardGpu(input, target, output);
 		}
 
 	protected:
 		virtual void _ForwardCpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
 		virtual void _ForwardGpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
 
+	protected:
+		ComputeType m_type;
 	};
 }
 

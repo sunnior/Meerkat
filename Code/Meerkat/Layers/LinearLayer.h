@@ -8,10 +8,9 @@ namespace DeepLearning
 	class LinearLayer : public Layer
 	{
 	public:
-		LinearLayer(dl_uint32 input_num, dl_uint32 output_num);
+		LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num);
 		~LinearLayer();
 
-		void Alloc(ComputeType type);
 		Tensor* GetWeight() { return m_weight; }
 		Tensor* GetBias() { return m_bias; }
 

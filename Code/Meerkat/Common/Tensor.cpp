@@ -3,7 +3,8 @@
 namespace DeepLearning
 {
 
-	Tensor::Tensor(std::initializer_list<dl_uint32> shape)
+	Tensor::Tensor(ComputeType type, std::initializer_list<dl_uint32> shape)
+		: m_type(type)
 	{
 		DL_PANIC_ON_FAIL(shape.size() <= s_max_dimension && dimension > 0, "invalid dimension");
 		m_dimension = static_cast<dl_uint32>(shape.size());
@@ -15,23 +16,29 @@ namespace DeepLearning
 			m_size *= n;
 			++i;
 		}
+
+		_Alloc(m_type);
 	}
 
-	void Tensor::Alloc(ComputeType type)
+	void Tensor::_Alloc(ComputeType type)
 	{
 		m_cpu_data = static_cast<dl_tensor*>(DL_CPU_ALLOC(m_size*sizeof(dl_tensor)));
 	}
 
 	void Tensor::Zeros()
 	{
-		std::memset(m_cpu_data, 0, sizeof(dl_tensor)*m_size);
+		if (m_type == ComputeType_CPU)
+		{
+			std::memset(m_cpu_data, 0, sizeof(dl_tensor)*m_size);
+		}
 	}
 
-	void Tensor::LoadData(ComputeType type, dl_tensor* pData)
+	void Tensor::LoadData(dl_tensor* pData)
 	{
-		if (type == ComputeType_CPU)
+		if (m_type == ComputeType_CPU)
 		{
 			std::memcpy(m_cpu_data, pData, m_size*sizeof(dl_tensor));
 		}
 	}
+
 }

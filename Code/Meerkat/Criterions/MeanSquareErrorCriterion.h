@@ -8,10 +8,8 @@ namespace DeepLearning
 	class MeanSquareErrorCriterion : public Criterion
 	{
 	public:
-		MeanSquareErrorCriterion(dl_uint32 batch_size);
+		MeanSquareErrorCriterion(ComputeType type, dl_uint32 batch_size);
 		~MeanSquareErrorCriterion();
-
-		void Alloc(ComputeType type);
 
 		void _ForwardCpu(const Tensor* input, const Tensor* target, dl_tensor* output) override;
 		void _ForwardGpu(const Tensor* input, const Tensor* target, dl_tensor* output) override;

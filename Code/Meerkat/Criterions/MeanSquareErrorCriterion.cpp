@@ -4,19 +4,15 @@
 namespace DeepLearning
 {
 
-	MeanSquareErrorCriterion::MeanSquareErrorCriterion(dl_uint32 batch_size)
+	MeanSquareErrorCriterion::MeanSquareErrorCriterion(ComputeType type, dl_uint32 batch_size)
+		: Criterion(type)
 	{
-		m_internal = DL_NEW(Tensor) { batch_size };
+		m_internal = DL_NEW(Tensor)(type, { batch_size });
 	}
 
 	MeanSquareErrorCriterion::~MeanSquareErrorCriterion()
 	{
 		DL_SAFE_DELETE(m_internal);
-	}
-
-	void MeanSquareErrorCriterion::Alloc(ComputeType type)
-	{
-		m_internal->Alloc(type);
 	}
 
 	void MeanSquareErrorCriterion::_ForwardCpu(const Tensor* input, const Tensor* target, dl_tensor* output)

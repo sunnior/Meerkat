@@ -3,25 +3,17 @@
 
 namespace DeepLearning
 {
-	LinearLayer::LinearLayer(dl_uint32 input_num, dl_uint32 output_num)
+	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
+		: Layer(type)
 	{
-		m_weight = DL_NEW(Tensor){input_num, output_num};
-		m_bias = DL_NEW(Tensor){output_num};
+		m_weight = DL_NEW(Tensor)(type, {input_num, output_num});
+		m_bias = DL_NEW(Tensor)(type, {output_num});
 	}
 
 	LinearLayer::~LinearLayer()
 	{
 		DL_SAFE_DELETE(m_weight);
 		DL_SAFE_DELETE(m_bias);
-	}
-
-	void LinearLayer::Alloc(ComputeType type)
-	{
-		m_weight->Alloc(type);
-		m_bias->Alloc(type);
-		TODO("way to init");
-		m_weight->Zeros();
-		m_bias->Zeros();
 	}
 
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
