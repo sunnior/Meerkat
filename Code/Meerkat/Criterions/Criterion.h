@@ -19,9 +19,18 @@ namespace DeepLearning
 			(m_type == ComputeType_CPU) ? _ForwardCpu(input, target, output) : _ForwardGpu(input, target, output);
 		}
 
+		void Backward(const Tensor* input, const Tensor* target, Tensor* output)
+		{
+			(m_type == ComputeType_CPU) ? _BackwardCpu(input, target, output) : _BackwardGpu(input, target, output);
+		}
+
 	protected:
 		virtual void _ForwardCpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
 		virtual void _ForwardGpu(const Tensor* input, const Tensor* target, dl_tensor* output) = 0;
+
+		virtual void _BackwardCpu(const Tensor* input, const Tensor* target, Tensor* output) = 0;
+		virtual void _BackwardGpu(const Tensor* input, const Tensor* target, Tensor* output) = 0;
+
 
 	protected:
 		ComputeType m_type;

@@ -8,28 +8,53 @@ using namespace DeepLearning;
 
 
 
-TEST(MeanSquareErrorCriterion)
-
+SUITE(MeanSquareErrorCriterion)
 {
-	const dl_uint32 batch_size = 8;
-	dl_tensor input_value[batch_size] = { 0.1f, 0.2f, 0.3f, 0.4f, 1.0f, 2.0f, 3.0f, 4.0f };
-	dl_tensor target_value[batch_size] = { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f, 100.0f, 1.0f, 1.0f };
-	dl_tensor loss_value = 1202.275f;
+	TEST(Forward)
+	{
+		const dl_uint32 batch_size = 8;
+		dl_tensor input_value[batch_size] = { 0.1f, 0.2f, 0.3f, 0.4f, 1.0f, 2.0f, 3.0f, 4.0f };
+		dl_tensor target_value[batch_size] = { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f, 100.0f, 1.0f, 1.0f };
+		dl_tensor loss_value = 1202.275f;
 
-	Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
-	Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
-	MeanSquareErrorCriterion* MseCriterion = DL_NEW(MeanSquareErrorCriterion)(ComputeType_CPU, batch_size);
+		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
+		Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
+		MeanSquareErrorCriterion* MseCriterion = DL_NEW(MeanSquareErrorCriterion)(ComputeType_CPU, batch_size);
 
-	dl_tensor output;
+		dl_tensor output;
 
-	input->LoadData((dl_tensor*)input_value);
-	target->LoadData((dl_tensor*)target_value);
+		input->LoadData((dl_tensor*)input_value);
+		target->LoadData((dl_tensor*)target_value);
 
-	MseCriterion->Forward(input, target, &output);
+		MseCriterion->Forward(input, target, &output);
 
-	CHECK_CLOSE(loss_value, output, 0.00001f);
+		CHECK_CLOSE(loss_value, output, 0.00001f);
 
-	DL_SAFE_DELETE(input);
-	DL_SAFE_DELETE(target);
-	DL_SAFE_DELETE(MseCriterion);
+		DL_SAFE_DELETE(input);
+		DL_SAFE_DELETE(target);
+		DL_SAFE_DELETE(MseCriterion);
+	}
+
+	TEST(Backward)
+	{
+		const dl_uint32 batch_size = 8;
+		dl_tensor input_value[batch_size] = { 0.1f, 0.2f, 0.3f, 0.4f, 1.0f, 2.0f, 3.0f, 4.0f };
+		dl_tensor target_value[batch_size] = { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f, 100.0f, 1.0f, 1.0f };
+		
+		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
+		Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
+		Tensor* output = DL_NEW(Tensor)(ComputeType_CPU, { batch_size });
+		MeanSquareErrorCriterion* MseCriterion = DL_NEW(MeanSquareErrorCriterion)(ComputeType_CPU, batch_size);
+
+		input->LoadData((dl_tensor*)input_value);
+		target->LoadData((dl_tensor*)target_value);
+
+		MseCriterion->Backward(input, target, output);
+
+		DL_SAFE_DELETE(input);
+		DL_SAFE_DELETE(target);
+		DL_SAFE_DELETE(output);
+		DL_SAFE_DELETE(MseCriterion);
+	}
+
 }

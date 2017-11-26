@@ -57,6 +57,18 @@ namespace DeepLearning
 		return cblas_sdot_ptr(n, x, incx, y, incy);
 	}
 
+	typedef void (*cblas_sscal_type)(OPENBLAS_CONST blasint N, OPENBLAS_CONST float alpha, float *X, OPENBLAS_CONST blasint incX);
+	extern cblas_sscal_type cblas_sscal_ptr;
+
+	template<typename T>
+	void dl_scal_cpu(const blasint N, const T alpha, T *X, const blasint incX);
+
+	template<>
+	inline void dl_scal_cpu<float>(const blasint N, const float alpha, float *X, const blasint incX)
+	{
+		cblas_sscal_ptr(N, alpha, X, incX);
+	}
+
 
 	template<typename T>
 	void dl_memcpy_cpu(T* dest, const T* src, const blasint size, const blasint repeat)

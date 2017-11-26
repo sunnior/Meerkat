@@ -7,6 +7,7 @@ namespace DeepLearning
 	cblas_saxpy_type cblas_saxpy_ptr;
 	cblas_scopy_type cblas_scopy_ptr;
 	cblas_sdot_type cblas_sdot_ptr;
+	cblas_sscal_type cblas_sscal_ptr;
 
 	void InitBlas()
 	{
@@ -15,6 +16,7 @@ namespace DeepLearning
 		cblas_saxpy_ptr = (cblas_saxpy_type)GetProcAddress(hDLL, "cblas_saxpy");
 		cblas_scopy_ptr = (cblas_scopy_type)GetProcAddress(hDLL, "cblas_scopy");
 		cblas_sdot_ptr = (cblas_sdot_type)GetProcAddress(hDLL, "cblas_sdot");
+		cblas_sscal_ptr = (cblas_sscal_type)GetProcAddress(hDLL, "cblas_sscal");
 	}
 
 
