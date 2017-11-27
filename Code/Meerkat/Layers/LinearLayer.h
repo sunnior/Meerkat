@@ -14,9 +14,15 @@ namespace DeepLearning
 		Tensor* GetWeight() { return m_weight; }
 		Tensor* GetBias() { return m_bias; }
 
+		GradParam* CreateGradParam(dl_uint32 batch_size) override;
+
 	private:
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;
+
+		void _BackwardGpu(const Tensor* intput, const Tensor* grad_input, Tensor* grad_output, GradParam* grad_param) override;
+		void _BackwardCpu(const Tensor* intput, const Tensor* grad_input, Tensor* grad_output, GradParam* grad_param) override;
+
 	private:
 		Tensor* m_weight{ nullptr };
 		Tensor* m_bias{ nullptr };

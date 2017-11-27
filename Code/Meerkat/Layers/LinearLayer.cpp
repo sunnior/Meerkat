@@ -16,6 +16,11 @@ namespace DeepLearning
 		DL_SAFE_DELETE(m_bias);
 	}
 
+	Layer::GradParam* LinearLayer::CreateGradParam(dl_uint32 batch_size)
+	{
+		return nullptr;
+	}
+
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
 	{
 		TODO("check dimension");
@@ -43,6 +48,16 @@ namespace DeepLearning
 	}
 
 	void LinearLayer::_ForwardGpu(const Tensor* input, Tensor* output)
+	{
+
+	}
+
+	void LinearLayer::_BackwardGpu(const Tensor* intput, const Tensor* grad_input, Tensor* grad_output, GradParam* grad_param)
+	{
+
+	}
+
+	void LinearLayer::_BackwardCpu(const Tensor* intput, const Tensor* grad_input, Tensor* grad_output, GradParam* grad_param)
 	{
 
 	}
