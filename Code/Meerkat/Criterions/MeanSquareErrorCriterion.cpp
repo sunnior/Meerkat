@@ -42,9 +42,10 @@ namespace DeepLearning
 		const dl_tensor* input_data = input->GetCpuData();
 		const dl_tensor* target_data = target->GetCpuData();
 
-		dl_copy_cpu<dl_tensor>(batch_size, target_data, 1, output_data, 1);
-		dl_axpy_cpu<dl_tensor>(batch_size, -1.0f, input_data, 1, output_data, 1);
-		dl_scal_cpu<dl_tensor>(batch_size, (dl_tensor)(2.0f / batch_size), output_data, 1);
+		dl_tensor norm = 2.0f / batch_size;
+		dl_copy_cpu<dl_tensor>(batch_size, input_data, 1, output_data, 1);
+		dl_axpy_cpu<dl_tensor>(batch_size, -1.0f, target_data, 1, output_data, 1);
+		dl_scal_cpu<dl_tensor>(batch_size, norm, output_data, 1);
 	}
 
 	void MeanSquareErrorCriterion::_BackwardGpu(const Tensor* input, const Tensor* target, Tensor* output)
