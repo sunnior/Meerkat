@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{884D228E-6783-41CD-99E9-FFD1CB9A9372}</ProjectGuid>
-    <RootNamespace>Sample1</RootNamespace>
+    <ProjectGuid>{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2}</ProjectGuid>
+    <RootNamespace>DemoLinearRegression</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -56,7 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(CodeDir)/Meerkat</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -66,7 +66,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(CodeDir)/Meerkat</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -74,7 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Sample1\Main.cpp" />
+    <ClCompile Include="..\..\..\Code\Demo\LinearRegression\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Meerkat\Meerkat.vcxproj">
