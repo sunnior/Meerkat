@@ -20,7 +20,7 @@ SUITE(LinearLayer)
 		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
 		Tensor* output = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });
 		Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });
-		LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, 4, 2);
+		LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, true, 4, 2);
 
 		input->LoadData((dl_tensor*)input_value);
 		target->LoadData((dl_tensor*)target_value);
@@ -55,7 +55,7 @@ SUITE(LinearLayer)
 		Tensor* correct_grad_weight = DL_NEW(Tensor)(ComputeType_CPU, { 2, 3 });
 		Tensor* correct_grad_output = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });
 		Tensor* correct_grad_bias = DL_NEW(Tensor)(ComputeType_CPU, { 3 });
-		LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, 2, 3);
+		LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, true, 2, 3);
 
 		input->LoadData((dl_tensor*)input_value);
 		grad_input->LoadData((dl_tensor*)grad_input_value);

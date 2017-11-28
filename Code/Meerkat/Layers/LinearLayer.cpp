@@ -3,40 +3,11 @@
 
 namespace DeepLearning
 {
-	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
-		: Layer(type)
+	LinearLayer::LinearLayer(ComputeType type, bool if_train, dl_uint32 input_num, dl_uint32 output_num)
+		: Layer(type, if_train)
 	{
-		m_weight = DL_NEW(Tensor)(type, {input_num, output_num});
-		m_bias = DL_NEW(Tensor)(type, {output_num});
-	}
-
-	LinearLayer::~LinearLayer()
-	{
-		DL_SAFE_DELETE(m_weight);
-		DL_SAFE_DELETE(m_bias);
-	}
-
-	bool LinearLayer::GetNextLearnablePair(Tensor*& param, Tensor*& grad_param)
-	{
-		switch (m_next_learnable_pair)
-		{
-		case 0:
-			param = m_weight;
-			grad_param = m_grad_weight;
-			break;
-		case 1:
-			param = m_bias;
-			grad_param = m_grad_bias;
-			break;
-		case 2:
-			m_next_learnable_pair = 0;
-			return false;
-			break;
-		default:
-			break;
-		}
-		++m_next_learnable_pair;
-		return true;
+		_CreateLearnableTensor(m_weight, m_grad_weight, {input_num, output_num});
+		_CreateLearnableTensor(m_bias, m_grad_bias, {output_num});
 	}
 
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
@@ -71,20 +42,12 @@ namespace DeepLearning
 
 	void LinearLayer::_CreateGradParam(dl_uint32 batch_size)
 	{
-		if (m_grad_bias != nullptr)
+		if (m_bias_multi != nullptr)
 		{
 			return;
 		}
 
-		dl_uint32 weight_size = m_weight->GetShape(0);
-		dl_uint32 bias_size = m_bias->GetShape(0);
-
-		m_grad_bias = DL_NEW(Tensor)(m_type, { bias_size });
-		m_grad_weight = DL_NEW(Tensor)(m_type, { weight_size, bias_size });
 		m_bias_multi = DL_NEW(Tensor)(m_type, { batch_size });
-
-		m_grad_bias->Zeros();
-		m_grad_weight->Zeros();
 		m_bias_multi->FillWith((dl_tensor)1.0f);
 	}
 

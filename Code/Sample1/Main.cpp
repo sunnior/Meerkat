@@ -12,7 +12,7 @@ int main()
 	Tensor* output = DL_NEW(Tensor)(ComputeType_CPU, { 1, 1 });
 	input->Zeros();
 
-	LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, 2, 1);
+	LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, true, 2, 1);
 	linear_layer->Forward(input, output);
 
 	
