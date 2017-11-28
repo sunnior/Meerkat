@@ -16,6 +16,29 @@ namespace DeepLearning
 		DL_SAFE_DELETE(m_bias);
 	}
 
+	bool LinearLayer::GetNextLearnablePair(Tensor*& param, Tensor*& grad_param)
+	{
+		switch (m_next_learnable_pair)
+		{
+		case 0:
+			param = m_weight;
+			grad_param = m_grad_weight;
+			break;
+		case 1:
+			param = m_bias;
+			grad_param = m_grad_bias;
+			break;
+		case 2:
+			m_next_learnable_pair = 0;
+			return false;
+			break;
+		default:
+			break;
+		}
+		++m_next_learnable_pair;
+		return true;
+	}
+
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
 	{
 		TODO("check dimension");

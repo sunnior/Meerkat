@@ -82,13 +82,17 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\LinearLayer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\Optimizer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Blas.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Layers\Layer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

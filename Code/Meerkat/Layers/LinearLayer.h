@@ -1,5 +1,5 @@
-#ifndef __MEERKAT_LINEARLAYER_H__
-#define __MEERKAT_LINEARLAYER_H__
+#ifndef __MEERKAT_LINEAR_LAYER_H__
+#define __MEERKAT_LINEAR_LAYER_H__
 
 #include "Layer.h"
 
@@ -17,6 +17,8 @@ namespace DeepLearning
 		Tensor* GetGradWeight() { return m_grad_weight; }
 		Tensor* GetGradBias() { return m_grad_bias; }
 
+		bool GetNextLearnablePair(Tensor*& param, Tensor*& grad_param) override;
+
 	private:
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;
@@ -33,6 +35,8 @@ namespace DeepLearning
 		Tensor* m_grad_bias{ nullptr };
 		Tensor* m_grad_weight{ nullptr };
 		Tensor* m_bias_multi{ nullptr };
+
+		dl_uint32 m_next_learnable_pair{ 0 };
 	};
 }
 

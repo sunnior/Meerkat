@@ -25,6 +25,12 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.h">
       <Filter>Criterions</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\Optimizer.h">
+      <Filter>Optimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h">
+      <Filter>Optimizer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -42,6 +48,12 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.cpp">
       <Filter>Criterions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Layers\Layer.cpp">
+      <Filter>Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp">
+      <Filter>Optimizer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Layers">
@@ -52,6 +64,9 @@
     </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{bc006466-3ae9-466d-a55e-cda35fb59bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Optimizer">
+      <UniqueIdentifier>{92aee1da-dbce-4403-804b-105dacf19b3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
