@@ -76,7 +76,6 @@ namespace DeepLearning
 
 		const dl_tensor* input_data = input->GetCpuData();
 		const dl_tensor* grad_input_data = grad_input->GetCpuData();
-		dl_tensor* grad_output_data = grad_output->GetCpuData();
 		const dl_tensor* weight_data = m_weight->GetCpuData();
 		dl_tensor* grad_weight = m_grad_weight->GetCpuData();
 
@@ -84,8 +83,12 @@ namespace DeepLearning
 		dl_tensor* grad_bias_data = m_grad_bias->GetCpuData();
 
 		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasTrans, CblasNoTrans, batch_size, bias_size, weight_size, (dl_tensor)1.0f, input_data, grad_input_data, (dl_tensor)1.0f, grad_weight);
-		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans, batch_size, weight_size, bias_size, (dl_tensor)1.0f, grad_input_data, weight_data, (dl_tensor)0.0f, grad_output_data);
 		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasNoTrans, 1, bias_size, batch_size, (dl_tensor)1.0f, bias_multi_data, grad_input_data, 1.0f, grad_bias_data);
+	
+		if (grad_output) {
+			dl_tensor* grad_output_data = grad_output->GetCpuData();
+			dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans, batch_size, weight_size, bias_size, (dl_tensor)1.0f, grad_input_data, weight_data, (dl_tensor)0.0f, grad_output_data);
+		}
 	}
 
 	void LinearLayer::_BackwardGpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)

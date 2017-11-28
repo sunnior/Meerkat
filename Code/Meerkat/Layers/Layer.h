@@ -25,6 +25,8 @@ namespace DeepLearning
 			(m_type == ComputeType_CPU) ? _BackwardCpu(input, grad_input, grad_output) : _BackwardGpu(input, grad_input, grad_output);
 		}
 
+		virtual void Update(class Optimizer* optimizer);
+		virtual bool GetNextLearnablePair(Tensor*& param, Tensor*& grad_param) { return false; }
 	protected:
 		virtual void _ForwardGpu(const Tensor* input, Tensor* output) = 0;
 		virtual void _ForwardCpu(const Tensor* input, Tensor* output) = 0;
