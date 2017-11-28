@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "Layers/LinearLayer.h"
 #include "Common/Meerkat.h"
 

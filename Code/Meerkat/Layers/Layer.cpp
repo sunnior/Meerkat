@@ -21,6 +21,7 @@ namespace DeepLearning
 	{
 		Tensor* tensor = DL_NEW(Tensor)(m_type, shape);
 		m_learnable_params[m_learnable_param_count] = tensor;
+		tensor->Zeros();
 		param = tensor;
 
 		if (m_if_train)
