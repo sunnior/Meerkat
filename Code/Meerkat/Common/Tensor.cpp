@@ -25,11 +25,15 @@ namespace DeepLearning
 		m_cpu_data = static_cast<dl_tensor*>(DL_CPU_ALLOC(m_size*sizeof(dl_tensor)));
 	}
 
-	void Tensor::Zeros()
+	void Tensor::FillWith(dl_tensor value)
 	{
 		if (m_type == ComputeType_CPU)
 		{
-			std::memset(m_cpu_data, 0, sizeof(dl_tensor)*m_size);
+			for (dl_size i = 0; i < m_size; ++i)
+			{
+				m_cpu_data[i] = value;
+			}
+			//std::memset(m_cpu_data, 0, sizeof(dl_tensor)*m_size);
 		}
 	}
 

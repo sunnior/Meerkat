@@ -11,7 +11,8 @@ namespace DeepLearning
 	public:
 		Tensor(ComputeType type, std::initializer_list<dl_uint32> shape);
 
-		void Zeros();
+		void Zeros() { FillWith((dl_tensor)0.0f); }
+		void FillWith(dl_tensor value);
 		dl_uint32 GetShape(dl_uint32 idx) const { return m_shape[idx]; }
 		dl_tensor* GetCpuData() { return m_cpu_data; }
 		const dl_tensor* GetCpuData() const { return m_cpu_data; }
