@@ -27,9 +27,9 @@ namespace DeepLearning
 
 		dl_size size = pA->GetSize();
 
-		dl_tensor* pDataA = pA->GetCpuData();
+		dl_tensor* pDataA = pA->GetData();
 
-		dl_tensor* pDataB = pB->GetCpuData();
+		dl_tensor* pDataB = pB->GetData();
 
 
 

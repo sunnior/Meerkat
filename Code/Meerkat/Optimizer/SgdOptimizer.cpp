@@ -9,7 +9,7 @@ namespace DeepLearning
 	{
 		const dl_tensor learning_rate = 0.01f;
 		dl_size nelement = param->GetSize();
-		dl_axpy_cpu<dl_tensor>(nelement, learning_rate, grad_param->GetCpuData(), 1, param->GetCpuData(), 1);
+		dl_axpy_cpu<dl_tensor>(nelement, learning_rate, grad_param->GetData(), 1, param->GetData(), 1);
 	}
 
 }

@@ -14,8 +14,8 @@ namespace DeepLearning
 		void Zeros() { FillWith((dl_tensor)0.0f); }
 		void FillWith(dl_tensor value);
 		dl_uint32 GetShape(dl_uint32 idx) const { return m_shape[idx]; }
-		dl_tensor* GetCpuData() { return m_cpu_data; }
-		const dl_tensor* GetCpuData() const { return m_cpu_data; }
+		dl_tensor* GetData() { return (m_type == ComputeType_CPU) ? m_cpu_data : m_gpu_data; }
+		const dl_tensor* GetData() const { return (m_type == ComputeType_CPU) ? m_cpu_data : m_gpu_data; }
 		dl_size GetSize() const { return m_size; }
 		void LoadData(dl_tensor* pData);
 

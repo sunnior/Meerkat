@@ -20,10 +20,10 @@ namespace DeepLearning
 		dl_uint32 n_size = output->GetShape(1);
 
 
-		const dl_tensor* input_data = input->GetCpuData();
-		dl_tensor* output_data = output->GetCpuData();
-		dl_tensor* weight_data = m_weight->GetCpuData();
-		dl_tensor* bias_data = m_bias->GetCpuData();
+		const dl_tensor* input_data = input->GetData();
+		dl_tensor* output_data = output->GetData();
+		dl_tensor* weight_data = m_weight->GetData();
+		dl_tensor* bias_data = m_bias->GetData();
 
 		dl_memcpy_cpu<dl_tensor>(output_data, bias_data, n_size, m_size);
 
@@ -60,19 +60,19 @@ namespace DeepLearning
 
 		_CreateGradParam(batch_size);
 
-		const dl_tensor* input_data = input->GetCpuData();
-		const dl_tensor* grad_input_data = grad_input->GetCpuData();
-		const dl_tensor* weight_data = m_weight->GetCpuData();
-		dl_tensor* grad_weight = m_grad_weight->GetCpuData();
+		const dl_tensor* input_data = input->GetData();
+		const dl_tensor* grad_input_data = grad_input->GetData();
+		const dl_tensor* weight_data = m_weight->GetData();
+		dl_tensor* grad_weight = m_grad_weight->GetData();
 
-		const dl_tensor* bias_multi_data = m_bias_multi->GetCpuData();
-		dl_tensor* grad_bias_data = m_grad_bias->GetCpuData();
+		const dl_tensor* bias_multi_data = m_bias_multi->GetData();
+		dl_tensor* grad_bias_data = m_grad_bias->GetData();
 
 		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasTrans, CblasNoTrans, batch_size, bias_size, weight_size, (dl_tensor)1.0f, input_data, grad_input_data, (dl_tensor)1.0f, grad_weight);
 		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasNoTrans, 1, bias_size, batch_size, (dl_tensor)1.0f, bias_multi_data, grad_input_data, 1.0f, grad_bias_data);
 	
 		if (grad_output) {
-			dl_tensor* grad_output_data = grad_output->GetCpuData();
+			dl_tensor* grad_output_data = grad_output->GetData();
 			dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans, batch_size, weight_size, bias_size, (dl_tensor)1.0f, grad_input_data, weight_data, (dl_tensor)0.0f, grad_output_data);
 		}
 	}

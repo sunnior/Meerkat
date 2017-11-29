@@ -19,9 +19,9 @@ namespace DeepLearning
 	{
 		dl_uint32 batch_size = target->GetShape(0);
 		
-		dl_tensor* internal_data = m_internal->GetCpuData();
-		const dl_tensor* input_data = input->GetCpuData();
-		const dl_tensor* target_data = target->GetCpuData();
+		dl_tensor* internal_data = m_internal->GetData();
+		const dl_tensor* input_data = input->GetData();
+		const dl_tensor* target_data = target->GetData();
 		
 		dl_copy_cpu<dl_tensor>(batch_size, target_data, 1, internal_data, 1);
 		dl_axpy_cpu<dl_tensor>(batch_size, -1.0f, input_data, 1, internal_data, 1);
@@ -38,9 +38,9 @@ namespace DeepLearning
 	{
 		dl_uint32 batch_size = target->GetShape(0);
 
-		dl_tensor* output_data = output->GetCpuData();
-		const dl_tensor* input_data = input->GetCpuData();
-		const dl_tensor* target_data = target->GetCpuData();
+		dl_tensor* output_data = output->GetData();
+		const dl_tensor* input_data = input->GetData();
+		const dl_tensor* target_data = target->GetData();
 
 		dl_tensor norm = 2.0f / batch_size;
 		dl_copy_cpu<dl_tensor>(batch_size, input_data, 1, output_data, 1);
