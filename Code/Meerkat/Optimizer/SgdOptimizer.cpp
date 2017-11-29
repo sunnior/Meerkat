@@ -4,12 +4,17 @@
 
 namespace DeepLearning
 {
-
-	void SgdOptimizer::Optimize(Tensor* param, Tensor* grad_param)
+	void SgdOptimizer::Update()
 	{
-		const dl_tensor learning_rate = 0.01f;
-		dl_size nelement = param->GetSize();
-		dl_axpy_cpu<dl_tensor>(nelement, learning_rate, grad_param->GetData(), 1, param->GetData(), 1);
+		dl_tensor learning_rate = m_learning_rate_base / (1 + m_eval*0.0001f);
+		++m_eval;
+		for (dl_uint32 i = 0; i < m_count; ++i)
+		{
+			dl_size nelement = m_params[i]->GetSize();
+			dl_axpy_cpu<dl_tensor>(nelement, -1.0f*learning_rate, m_grad_params[i]->GetData(), 1, m_params[i]->GetData(), 1);
+			m_grad_params[i]->Zeros();
+		}
+
 	}
 
 }
