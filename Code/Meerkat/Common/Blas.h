@@ -17,8 +17,8 @@ namespace DeepLearning
 	inline void dl_gemm_cpu<float>(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_TRANSPOSE TransB, const blasint M, const blasint N, const blasint K,
 			const float alpha, const float *A, const float *B, const float beta, float *C)
 	{
-		const blasint lda = (TransA == CblasNoTrans && K != 1) ? K : M;
-		const blasint ldb = (TransB == CblasNoTrans && N != 1) ? N : K;
+		const blasint lda = (TransA == CblasNoTrans) ? K : M;
+		const blasint ldb = (TransB == CblasNoTrans) ? N : K;
 		const blasint ldc = N;
 		cblas_sgemm_ptr(Order, TransA, TransB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
 	}
