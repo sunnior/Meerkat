@@ -31,6 +31,9 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h">
       <Filter>Optimizer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Layers\LogSoftMaxLayer.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp">
       <Filter>Optimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Layers\LogSoftMaxLayer.cpp">
+      <Filter>Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

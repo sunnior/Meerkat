@@ -4,6 +4,7 @@
     <ClCompile Include="..\..\..\Code\TestRunner\Main.cpp" />
     <ClCompile Include="..\..\..\Code\TestRunner\Test_LinearLayer.cpp" />
     <ClCompile Include="..\..\..\Code\TestRunner\Test_MeanSquareErrorCriterion.cpp" />
+    <ClCompile Include="..\..\..\Code\TestRunner\Test_LogSoftMaxLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\TestRunner\Util.h" />

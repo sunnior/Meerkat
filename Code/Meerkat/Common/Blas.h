@@ -83,6 +83,20 @@ namespace DeepLearning
 		}
 	}
 
+	template<typename T>
+	T dl_max_cpu(const T* src, const blasint size)
+	{
+		T max_value = src[0];
+		for (blasint i = 1; i < size; ++i)
+		{
+			if (max_value < src[i])
+			{
+				max_value = src[i];
+			}
+		}
+
+		return max_value;
+	}
 	void InitBlas();
 }
 
