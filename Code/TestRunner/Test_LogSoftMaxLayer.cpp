@@ -23,6 +23,11 @@ SUITE(LogSoftMaxLayer)
 
 
 		CHECK(dl_check_cpumem_close(target, output));
+
+		DL_SAFE_DELETE(input);
+		DL_SAFE_DELETE(output);
+		DL_SAFE_DELETE(target);
+		DL_SAFE_DELETE(layer);
 	}
 
 	TEST(Backward)

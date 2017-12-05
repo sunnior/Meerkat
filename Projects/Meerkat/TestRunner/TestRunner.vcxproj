@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\TestRunner\Main.cpp" />
+    <ClCompile Include="..\..\..\Code\TestRunner\Test_ClassNllCriterion.cpp" />
     <ClCompile Include="..\..\..\Code\TestRunner\Test_LinearLayer.cpp" />
     <ClCompile Include="..\..\..\Code\TestRunner\Test_LogSoftMaxLayer.cpp" />
     <ClCompile Include="..\..\..\Code\TestRunner\Test_MeanSquareErrorCriterion.cpp" />

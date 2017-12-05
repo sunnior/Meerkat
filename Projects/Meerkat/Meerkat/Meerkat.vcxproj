@@ -78,6 +78,7 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Meerkat.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Platform.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Common\Tensor.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Criterions\ClassNllCriterion.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\Criterion.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Blas.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Meerkat.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Common\Tensor.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Criterions\ClassNllCriterion.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Criterions\MeanSquareErrorCriterion.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\Layer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp" />
