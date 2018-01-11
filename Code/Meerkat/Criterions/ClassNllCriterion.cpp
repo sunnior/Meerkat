@@ -12,7 +12,7 @@ namespace DeepLearning
 		*output = 0;
 		for (dl_uint32 i = 0; i < batch_size; ++i)
 		{
-			*output += input_data[i*label_size + (dl_uint32)target_data[i]];
+			*output -= input_data[i*label_size + (dl_uint32)target_data[i]];
 		}
 	}
 

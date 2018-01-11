@@ -9,7 +9,7 @@ using namespace DeepLearning;
 
 int main()
 {
-	const unsigned int batch_size = 1;
+	const unsigned int batch_size = 64;
 	const char* train_image_file_path = "train-images.idx3-ubyte";
 	const char* train_label_file_path = "train-labels.idx1-ubyte";
 
