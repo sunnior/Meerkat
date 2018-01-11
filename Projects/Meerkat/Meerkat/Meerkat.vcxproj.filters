@@ -37,6 +37,12 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Criterions\ClassNllCriterion.h">
       <Filter>Criterions</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Model\Linker.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Model\Model.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -66,6 +72,12 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Criterions\ClassNllCriterion.cpp">
       <Filter>Criterions</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Model\Linker.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Model\Model.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Layers">
@@ -79,6 +91,9 @@
     </Filter>
     <Filter Include="Optimizer">
       <UniqueIdentifier>{92aee1da-dbce-4403-804b-105dacf19b3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{44523c9a-7e80-4aff-88b7-df93daf37adb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

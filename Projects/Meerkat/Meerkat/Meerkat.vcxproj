@@ -84,6 +84,8 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\Layer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\LinearLayer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Layers\LogSoftMaxLayer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Model\Linker.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Model\Model.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\Optimizer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h" />
   </ItemGroup>
@@ -96,6 +98,8 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\Layer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LogSoftMaxLayer.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Model\Linker.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Model\Model.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
