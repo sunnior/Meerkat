@@ -42,10 +42,10 @@ SUITE(LinearLayer)
 	{
 		dl_tensor input_value[2][2] = { { 1.0f, 1.0f },{ 2.0f, 3.0f } };
 		dl_tensor grad_input_value[2][3] = { { 1.0f, 2.0f, 3.0f },{ 4.0f, 5.0f, 6.0f } };
-		dl_tensor weight_value[2][3] = { { 1.0f, 2.0f, 3.0f },{ 4.0f, 5.0f, 6.0f } };
+		dl_tensor weight_value[3][2] = { { 1.0f, 4.0f },{ 2.0f, 5.0f },{ 3.0f , 6.0f } };
 		dl_tensor bias_value[3] = { 0.1f, 0.2f, 0.3f };
 
-		dl_tensor correct_grad_weight_value[2][3] = { { 9.0f, 12.0f, 15.0f },{ 13.0f, 17.0f, 21.0f } };
+		dl_tensor correct_grad_weight_value[3][2] = { { 9.0f, 13.0f },{ 12.0f, 17.0f },{ 15.0f, 21.0f } };
 		dl_tensor correct_grad_output_value[2][2] = { { 14.0f, 32.0f },{ 32.0f, 77.0f } };
 		dl_tensor correct_grad_bias_value[3] = { 5.0f, 7.0f, 9.0f };
 
