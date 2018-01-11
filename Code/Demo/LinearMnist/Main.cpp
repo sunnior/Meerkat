@@ -4,6 +4,7 @@
 #include "Layers/LogSoftMaxLayer.h"
 #include "Optimizer/SgdOptimizer.h"
 #include "Criterions/ClassNllCriterion.h"
+#include "Model/Model.h"
 
 using namespace DeepLearning;
 
@@ -41,12 +42,19 @@ int main()
 	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU, params, grad_params, count);
 	ClassNllCriterion* criterion = DL_NEW(ClassNllCriterion)(ComputeType_CPU);
 
+	Model* model = DL_NEW(Model);
+
+	model->LinkBegin(linear_layer);
+	model->Link(linear_layer, logsoftmax_layer);
+	model->LinkEnd(logsoftmax_layer);
+
 	train_db.LoadData(data, label, batch_size);
 
 	while (true)
 	{
-		linear_layer->Forward(data, output1);
-		logsoftmax_layer->Forward(output1, output2);
+		//linear_layer->Forward(data, output1);
+		//logsoftmax_layer->Forward(output1, output2);
+		model->Forward();
 
 		dl_tensor loss;
 		criterion->Forward(output2, label, &loss);
