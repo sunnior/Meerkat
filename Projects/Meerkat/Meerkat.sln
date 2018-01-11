@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestRunner", "TestRunner\Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoLinearRegression", "DemoLinearRegression\DemoLinearRegression.vcxproj", "{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoLinearMnist", "DemoLinearMnist\DemoLinearMnist.vcxproj", "{6266B3E8-3786-47A9-9C7B-F52F8741B554}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -55,6 +57,12 @@ Global
 		{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2}.Release|x64.ActiveCfg = Release|x64
 		{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2}.Release|x64.Build.0 = Release|x64
 		{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2}.Release|x86.ActiveCfg = Release|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Debug|x64.ActiveCfg = Debug|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Debug|x64.Build.0 = Debug|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Debug|x86.ActiveCfg = Debug|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Release|x64.ActiveCfg = Release|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Release|x64.Build.0 = Release|x64
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +72,6 @@ Global
 		{0E71457F-E411-415E-9EEB-6643E654FC80} = {D2F29E8D-CD8F-4DAA-B3CA-06C552243BD3}
 		{44F3961B-2DC5-4A52-A39F-8E356BF5A606} = {D2F29E8D-CD8F-4DAA-B3CA-06C552243BD3}
 		{07A9AE49-74FF-4C28-B6F2-64FD719D8AB2} = {B8885A5F-AF1A-4906-BA04-BB81AD20C3A0}
+		{6266B3E8-3786-47A9-9C7B-F52F8741B554} = {B8885A5F-AF1A-4906-BA04-BB81AD20C3A0}
 	EndGlobalSection
 EndGlobal

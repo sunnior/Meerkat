@@ -9,6 +9,7 @@ namespace DeepLearning
 #if defined(_MSC_VER)
 	typedef float			dl_tensor;
 	typedef unsigned int	dl_uint32;
+	typedef unsigned char	dl_uint8;
 	typedef size_t			dl_size;
 #else
 #error "unkown platform!"
