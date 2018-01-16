@@ -12,6 +12,10 @@ namespace DeepLearning
 			: Layer(type, false)
 		{};
 
+		dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) override
+		{
+			return input_shape;
+		}
 	protected:
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;

@@ -2,6 +2,7 @@
 #define __MEERKAT_OPTIMIZER_H__
 
 #include "Common/Platform.h"
+#include "Util/dl_stl.h"
 
 namespace DeepLearning
 {
@@ -10,21 +11,19 @@ namespace DeepLearning
 	class Optimizer
 	{
 	public:
-		Optimizer(ComputeType type, Tensor** params, Tensor** grad_params, dl_uint32 count)
+		Optimizer(ComputeType type, dl_vector<Tensor*> params, dl_vector<Tensor*> grad_params)
 			: m_type(type)
 			, m_params(params)
 			, m_grad_params(grad_params)
-			, m_count(count)
 		{ };
 
 		virtual ~Optimizer() {};
 
 		virtual void Update() = 0;
 	protected:
-		const dl_uint32 m_count;
 		ComputeType		m_type;
-		Tensor**		m_params;
-		Tensor**		m_grad_params;
+		dl_vector<Tensor*>		m_params;
+		dl_vector<Tensor*>		m_grad_params;
 	};
 }
 

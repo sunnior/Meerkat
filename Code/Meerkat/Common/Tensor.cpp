@@ -3,18 +3,14 @@
 namespace DeepLearning
 {
 
-	Tensor::Tensor(ComputeType type, std::initializer_list<dl_uint32> shape)
+	Tensor::Tensor(ComputeType type, const dl_tensor_shape& shape)
 		: m_type(type)
+		, m_shape(shape)
+		, m_size(1)
 	{
-		DL_PANIC_ON_FAIL(shape.size() <= s_max_dimension && dimension > 0, "invalid dimension");
-		m_dimension = static_cast<dl_uint32>(shape.size());
-		m_size = 1;
-		dl_uint32 i = 0;
-		for (dl_uint32 n : shape)
+		for (dl_uint32 n : m_shape)
 		{
-			m_shape[i] = n;
 			m_size *= n;
-			++i;
 		}
 
 		_Alloc(m_type);

@@ -16,6 +16,8 @@ namespace DeepLearning
 		Tensor* GetGradWeight() { return m_grad_weight; }
 		Tensor* GetGradBias() { return m_grad_bias; }
 
+		dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) override;
+
 	private:
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;

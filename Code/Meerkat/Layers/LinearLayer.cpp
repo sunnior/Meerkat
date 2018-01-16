@@ -10,6 +10,11 @@ namespace DeepLearning
 		_CreateLearnableTensor(m_bias, m_grad_bias, {output_num});
 	}
 
+	dl_tensor_shape LinearLayer::GetOutputShape(const dl_tensor_shape& input_shape)
+	{
+		return dl_tensor_shape(m_bias->GetShape());
+	}
+
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
 	{
 		TODO("check dimension");

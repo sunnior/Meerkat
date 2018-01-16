@@ -88,6 +88,7 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Model\Model.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\Optimizer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\Reflection.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_stl.h" />
   </ItemGroup>
@@ -103,6 +104,7 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Model\Linker.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Model\Model.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\Reflection.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

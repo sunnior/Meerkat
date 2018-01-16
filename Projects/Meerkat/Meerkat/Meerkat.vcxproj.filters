@@ -49,6 +49,9 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\Reflection.h">
+      <Filter>Reflection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -87,6 +90,9 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\Reflection.cpp">
+      <Filter>Reflection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Layers">
@@ -106,6 +112,9 @@
     </Filter>
     <Filter Include="Util">
       <UniqueIdentifier>{7e765488-8d53-4deb-9671-1a1e6b9df7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Reflection">
+      <UniqueIdentifier>{98173cf6-181c-43ba-927b-db37af905498}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

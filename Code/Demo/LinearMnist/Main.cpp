@@ -23,45 +23,37 @@ int main()
 	
 	train_db.GetDimension(rows, columns, labels);
 
-	Tensor* data = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, rows*columns });
 	Tensor* label = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, 1 });
-	Tensor* output1 = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, labels });
-	Tensor* output2 = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, labels });
 
-	Tensor* grad_output1 = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, labels });
-	Tensor* grad_output2 = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, labels });
+	Model* model = DL_NEW(Model)(ComputeType_CPU, true);
+	model->CreateLayer("layer_linear", "linear", rows*columns, labels);
+	model->CreateLayer("layer_logsoftmax", "logsoftmax");
+	model->LinkBegin("linear");
+	model->LinkEnd("logsoftmax");
+	model->Link("linear", "logsoftmax");
 
-	LinearLayer* linear_layer = DL_NEW(LinearLayer)(ComputeType_CPU, true, rows*columns, labels);
-	LogSoftMaxLayer* logsoftmax_layer = DL_NEW(LogSoftMaxLayer)(ComputeType_CPU);
+	model->CreateData(batch_size, { rows*columns });
+	Tensor* data = model->GetInputData();
 
-	dl_uint32 count;
-	Tensor** params;
-	Tensor** grad_params;
-	linear_layer->GetLearnableParam(params, grad_params, count);
+	dl_vector<Tensor*> params;
+	dl_vector<Tensor*> grad_params;
+	model->GetLearnableParam(params, grad_params);
 
-	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU, params, grad_params, count);
+	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU, params, grad_params);
 	ClassNllCriterion* criterion = DL_NEW(ClassNllCriterion)(ComputeType_CPU);
-
-	Model* model = DL_NEW(Model);
-
-	model->LinkBegin(linear_layer);
-	model->Link(linear_layer, logsoftmax_layer);
-	model->LinkEnd(logsoftmax_layer);
 
 	train_db.LoadData(data, label, batch_size);
 
 	while (true)
 	{
-		//linear_layer->Forward(data, output1);
-		//logsoftmax_layer->Forward(output1, output2);
 		model->Forward();
 
 		dl_tensor loss;
-		criterion->Forward(output2, label, &loss);
+		criterion->Forward(model->GetOutputData(), label, &loss);
 
-		criterion->Backward(output2, label, grad_output2);
-		logsoftmax_layer->Backward(output1, grad_output2, grad_output1);
-		linear_layer->Backward(data, grad_output1, nullptr);
+		criterion->Backward(model->GetOutputData(), label, model->GetOutputGradData());
+
+		model->Backward();
 
 		optimizer->Update();
 	}

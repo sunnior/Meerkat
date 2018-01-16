@@ -8,8 +8,8 @@ namespace DeepLearning
 	class SgdOptimizer : public Optimizer
 	{
 	public:
-		SgdOptimizer(ComputeType type, Tensor** params, Tensor** grad_params, dl_uint32 count)
-			: Optimizer(type, params, grad_params, count)
+		SgdOptimizer(ComputeType type, dl_vector<Tensor*> params, dl_vector<Tensor*> grad_params)
+			: Optimizer(type, params, grad_params)
 		{};
 
 		void Update() override;
