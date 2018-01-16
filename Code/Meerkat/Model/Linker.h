@@ -30,12 +30,13 @@ namespace DeepLearning
 		Linker* GetOutput() { return m_output_linker; }
 
 		void CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape);
-		void CreateDataRecurrent(dl_uint32 batch_size);
+		void CreateDataRecurrent(dl_uint32 batch_size, bool if_train);
 
 		Tensor* GetData() { return m_data; }
 		Tensor* GetGradData() { return m_grad_data; }
 
-		void GetLearnableParam(const dl_vector<Tensor*>*& params, const dl_vector<Tensor*>*& param_grads);
+		void Optimize(class Optimizer* opti);
+
 	private:
 
 		ComputeType m_type;

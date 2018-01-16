@@ -25,21 +25,17 @@ int main()
 
 	Tensor* label = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, 1 });
 
-	Model* model = DL_NEW(Model)(ComputeType_CPU, true);
+	Model* model = DL_NEW(Model)(ComputeType_CPU);
 	model->CreateLayer("layer_linear", "linear", rows*columns, labels);
 	model->CreateLayer("layer_logsoftmax", "logsoftmax");
 	model->LinkBegin("linear");
 	model->LinkEnd("logsoftmax");
 	model->Link("linear", "logsoftmax");
 
-	model->CreateData(batch_size, { rows*columns });
+	model->CreateData(batch_size, { rows*columns }, true);
 	Tensor* data = model->GetInputData();
 
-	dl_vector<Tensor*> params;
-	dl_vector<Tensor*> grad_params;
-	model->GetLearnableParam(params, grad_params);
-
-	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU, params, grad_params);
+	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU);
 	ClassNllCriterion* criterion = DL_NEW(ClassNllCriterion)(ComputeType_CPU);
 
 	train_db.LoadData(data, label, batch_size);
@@ -56,7 +52,7 @@ int main()
 
 		model->Backward();
 
-		optimizer->Update();
+		model->Optimize(optimizer);
 	}
 
 	DL_SAFE_DELETE(label);

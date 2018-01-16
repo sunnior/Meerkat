@@ -10,7 +10,7 @@ namespace DeepLearning
 	class Model
 	{
 	public:
-		Model(ComputeType type, bool if_train);
+		Model(ComputeType type);
 		~Model();
 
 		void CreateLayer(const char* class_name, const char* layer_name, ...);
@@ -19,9 +19,9 @@ namespace DeepLearning
 		void LinkBegin(const char* name);
 		void LinkEnd(const char* name);
 
-		void GetLearnableParam(dl_vector<Tensor*>& params, dl_vector<Tensor*>& param_grads);
-		void CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape);
+		void CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape, bool if_train = false);
 
+	public:
 		void Forward();
 		void Backward();
 
@@ -31,10 +31,13 @@ namespace DeepLearning
 		Tensor* GetOutputData() { return m_end_linker->GetInput()->GetData(); }
 		Tensor* GetOutputGradData() { return m_end_linker->GetGradData(); }
 
+
+	public:
+		void Optimize(class Optimizer* opti);
+
 	private:
 
 		ComputeType m_type;
-		bool        m_if_train;
 
 		//Currently I assume only one linker for input and output
 		Linker* m_begin_linker{ nullptr };

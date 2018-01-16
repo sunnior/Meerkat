@@ -10,9 +10,8 @@ namespace DeepLearning
 	class Layer
 	{
 	public:
-		Layer(ComputeType type, bool if_train)
+		Layer(ComputeType type)
 			: m_type(type)
-			, m_if_train(if_train)
 		{};
 
 		virtual ~Layer();
@@ -27,14 +26,11 @@ namespace DeepLearning
 			(m_type == ComputeType_CPU) ? _BackwardCpu(input, grad_input, grad_output) : _BackwardGpu(input, grad_input, grad_output);
 		}
 
-		void GetLearnableParam(const dl_vector<Tensor*>*& params, const dl_vector<Tensor*>*& param_grads)
-		{
-			params = &m_learnable_params;
-			param_grads = &m_learnable_param_grads;
-		}
-
 		virtual dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) = 0;
 
+		virtual void CreateTrainData(dl_uint32 batch_size) {};
+
+		void Optimize(class Optimizer* opti);
 	protected:
 		virtual void _ForwardGpu(const Tensor* input, Tensor* output) = 0;
 		virtual void _ForwardCpu(const Tensor* input, Tensor* output) = 0;
@@ -42,14 +38,14 @@ namespace DeepLearning
 		virtual void _BackwardGpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output) = 0;
 		virtual void _BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output) = 0;
 
-		void _CreateLearnableTensor(Tensor*& param, Tensor*& param_grad, dl_tensor_shape shape);
+		Tensor* _CreateTensor(const dl_tensor_shape& shape);
+
+		virtual void _GetLearnableTensor(dl_vector<::std::pair<Tensor*, Tensor*>>& params) {};
 	protected:
 		ComputeType m_type;
-		const bool  m_if_train;
 
 	private:
-		dl_vector<Tensor*> m_learnable_params;
-		dl_vector<Tensor*> m_learnable_param_grads;
+		dl_vector<Tensor*> m_tensors;
 	};
 
 }

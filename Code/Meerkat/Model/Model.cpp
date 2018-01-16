@@ -4,9 +4,8 @@
 
 namespace DeepLearning
 {
-	Model::Model(ComputeType type, bool if_train)
+	Model::Model(ComputeType type)
 		: m_type(type)
-		, m_if_train(if_train)
 	{
 		m_begin_linker = DL_NEW(Linker)(m_type);
 		m_end_linker = DL_NEW(Linker)(m_type);
@@ -30,7 +29,7 @@ namespace DeepLearning
 	{
 		va_list vl;
 		va_start(vl, layer_name);
-		Layer* layer = Reflection::CreateLayer(class_name, m_type, m_if_train, vl);
+		Layer* layer = Reflection::CreateLayer(class_name, m_type, vl);
 		Linker* linker = DL_NEW(Linker)(m_type, layer);
 		m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_name), linker));
 	}
@@ -58,22 +57,10 @@ namespace DeepLearning
 		linker->SetOutput(m_end_linker);
 	}
 
-	void Model::GetLearnableParam(dl_vector<Tensor*>& params, dl_vector<Tensor*>& param_grads)
-	{
-		for (auto it : m_linkers)
-		{
-			const dl_vector<Tensor*>* p_params;
-			const dl_vector<Tensor*>* p_param_grads;
-			it.second->GetLearnableParam(p_params, p_param_grads);
-			params.insert(params.end(), p_params->begin(), p_params->end());
-			param_grads.insert(param_grads.end(), p_param_grads->begin(), p_param_grads->end());
-		}
-	}
-
-	void Model::CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape)
+	void Model::CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape, bool if_train)
 	{
 		m_begin_linker->CreateData(batch_size, data_shape);
-		m_end_linker->CreateDataRecurrent(batch_size);
+		m_end_linker->CreateDataRecurrent(batch_size, if_train);
 	}
 
 	void Model::Forward()
@@ -92,6 +79,14 @@ namespace DeepLearning
 		for (auto it : m_linkers)
 		{
 			it.second->ClearState();
+		}
+	}
+
+	void Model::Optimize(class Optimizer* opti)
+	{
+		for (auto it : m_linkers)
+		{
+			it.second->Optimize(opti);
 		}
 	}
 

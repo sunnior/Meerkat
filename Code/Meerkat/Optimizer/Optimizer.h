@@ -11,19 +11,15 @@ namespace DeepLearning
 	class Optimizer
 	{
 	public:
-		Optimizer(ComputeType type, dl_vector<Tensor*> params, dl_vector<Tensor*> grad_params)
+		Optimizer(ComputeType type)
 			: m_type(type)
-			, m_params(params)
-			, m_grad_params(grad_params)
 		{ };
 
 		virtual ~Optimizer() {};
 
-		virtual void Update() = 0;
+		virtual void Update(const dl_vector<::std::pair<Tensor*, Tensor*>>& params) = 0;
 	protected:
 		ComputeType		m_type;
-		dl_vector<Tensor*>		m_params;
-		dl_vector<Tensor*>		m_grad_params;
 	};
 }
 

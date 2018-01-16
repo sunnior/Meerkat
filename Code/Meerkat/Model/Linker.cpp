@@ -57,12 +57,12 @@ namespace DeepLearning
 		m_data = DL_NEW(Tensor)(m_type, shape);
 	}
 
-	void Linker::CreateDataRecurrent(dl_uint32 batch_size)
+	void Linker::CreateDataRecurrent(dl_uint32 batch_size, bool if_train)
 	{
 		Tensor* input_data = m_input_linker->GetData();
 		if (input_data == nullptr)
 		{
-			m_input_linker->CreateDataRecurrent(batch_size);
+			m_input_linker->CreateDataRecurrent(batch_size, if_train);
 			input_data = m_input_linker->GetData();
 		}
 
@@ -75,13 +75,21 @@ namespace DeepLearning
 			dl_tensor_shape output_shape = m_layer->GetOutputShape(shape);
 			output_shape.insert(output_shape.begin(), batch_size);
 			m_data = DL_NEW(Tensor)(m_type, output_shape);
+
+			if (if_train)
+			{
+				m_layer->CreateTrainData(batch_size);
+			}
 		}
 
 	}
 
-	void Linker::GetLearnableParam(const dl_vector<Tensor*>*& params, const dl_vector<Tensor*>*& param_grads)
+	void Linker::Optimize(class Optimizer* opti)
 	{
-		m_layer->GetLearnableParam(params, param_grads);
+		if (m_layer)
+		{
+			m_layer->Optimize(opti);
+		}
 	}
 
 }

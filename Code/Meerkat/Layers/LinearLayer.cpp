@@ -3,16 +3,25 @@
 
 namespace DeepLearning
 {
-	LinearLayer::LinearLayer(ComputeType type, bool if_train, dl_uint32 input_num, dl_uint32 output_num)
-		: Layer(type, if_train)
+	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
+		: Layer(type)
 	{
-		_CreateLearnableTensor(m_weight, m_grad_weight, {input_num, output_num});
-		_CreateLearnableTensor(m_bias, m_grad_bias, {output_num});
+		m_weight = _CreateTensor({ input_num, output_num });
+		m_bias = _CreateTensor({ output_num });
 	}
 
 	dl_tensor_shape LinearLayer::GetOutputShape(const dl_tensor_shape& input_shape)
 	{
 		return dl_tensor_shape(m_bias->GetShape());
+	}
+
+	void LinearLayer::CreateTrainData(dl_uint32 batch_size)
+	{
+		m_grad_weight = _CreateTensor(m_weight->GetShape());
+		m_grad_bias = _CreateTensor(m_bias->GetShape());
+
+		m_bias_multi = _CreateTensor({ batch_size });
+		m_bias_multi->FillWith((dl_tensor)1.0f);
 	}
 
 	void LinearLayer::_ForwardCpu(const Tensor* input, Tensor* output)
@@ -44,18 +53,6 @@ namespace DeepLearning
 	{
 
 	}
-
-	void LinearLayer::_CreateGradParam(dl_uint32 batch_size)
-	{
-		if (m_bias_multi != nullptr)
-		{
-			return;
-		}
-
-		m_bias_multi = DL_NEW(Tensor)(m_type, { batch_size });
-		m_bias_multi->FillWith((dl_tensor)1.0f);
-	}
-
 
 /*
 	void LinearLayer::_BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)
@@ -128,6 +125,12 @@ namespace DeepLearning
 			}
 		}
 
+	}
+
+	void LinearLayer::_GetLearnableTensor(dl_vector<::std::pair<Tensor*, Tensor*>>& params)
+	{
+		params.push_back(::std::pair<Tensor*, Tensor*>(m_weight, m_grad_weight));
+		params.push_back(::std::pair<Tensor*, Tensor*>(m_bias, m_grad_bias));
 	}
 
 	void LinearLayer::_BackwardGpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)

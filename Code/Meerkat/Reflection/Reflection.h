@@ -12,7 +12,7 @@ namespace DeepLearning
 	class Reflection
 	{
 	public:
-		static Layer* CreateLayer(const char* name, ComputeType type, bool if_train, va_list vl);
+		static Layer* CreateLayer(const char* name, ComputeType type, va_list vl);
 	};
 }
 
