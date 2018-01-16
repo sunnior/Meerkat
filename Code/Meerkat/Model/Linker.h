@@ -12,11 +12,12 @@ namespace DeepLearning
 	{
 	public:
 		Linker(ComputeType type, Layer* layer = nullptr);
+		~Linker();
 
 		void ForwardRecurrent();
 		void BackwardRecurrent();
 
-
+		void ClearState();
 		bool IsForwardReady() { return m_is_forward_ready; }
 		void SetForwardReady(bool flag) { m_is_forward_ready = flag; }
 		bool IsBackwardReady() { return m_is_backward_ready; }

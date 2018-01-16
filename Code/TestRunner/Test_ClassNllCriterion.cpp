@@ -10,7 +10,7 @@ SUITE(ClassNllCriterion)
 	{
 		dl_tensor target_value[2] = { 0, 1 };
 		dl_tensor input_value[2][2] = { {1, 2}, {10, 20} };
-		dl_tensor correct_value = 21.0f;
+		dl_tensor correct_value = -21.0f;
 		
 		Tensor* target = DL_NEW(Tensor)(ComputeType_CPU, { 2 });
 		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 2 });

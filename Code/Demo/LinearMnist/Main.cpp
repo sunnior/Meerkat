@@ -46,6 +46,7 @@ int main()
 
 	while (true)
 	{
+		model->ClearState();
 		model->Forward();
 
 		dl_tensor loss;
@@ -57,6 +58,11 @@ int main()
 
 		optimizer->Update();
 	}
+
+	DL_SAFE_DELETE(label);
+	DL_SAFE_DELETE(model);
+	DL_SAFE_DELETE(optimizer);
+	DL_SAFE_DELETE(criterion);
 
 	return 0;
 }

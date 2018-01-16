@@ -10,6 +10,20 @@ namespace DeepLearning
 	{
 		m_begin_linker = DL_NEW(Linker)(m_type);
 		m_end_linker = DL_NEW(Linker)(m_type);
+		m_begin_linker->SetForwardReady(true);
+		m_end_linker->SetBackwardReady(true);
+	}
+
+	Model::~Model()
+	{
+		for (auto it : m_linkers)
+		{
+			DL_SAFE_DELETE(it.second);
+		}
+
+		m_linkers.clear();
+		DL_SAFE_DELETE(m_begin_linker);
+		DL_SAFE_DELETE(m_end_linker);
 	}
 
 	void Model::CreateLayer(const char* class_name, const char* layer_name, ...)
@@ -64,14 +78,21 @@ namespace DeepLearning
 
 	void Model::Forward()
 	{
-		m_begin_linker->SetForwardReady(true);
 		m_end_linker->ForwardRecurrent();
 	}
 
 
 	void Model::Backward()
 	{
-		m_end_linker->SetBackwardReady(true);
 		m_begin_linker->BackwardRecurrent();
 	}
+
+	void Model::ClearState()
+	{
+		for (auto it : m_linkers)
+		{
+			it.second->ClearState();
+		}
+	}
+
 }

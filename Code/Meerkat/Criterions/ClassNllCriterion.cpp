@@ -26,6 +26,7 @@ namespace DeepLearning
 		dl_uint32 batch_size = input->GetShape(0);
 		dl_uint32 param_size = input->GetShape(1);
 
+		TODO("where to zero output");
 	    output->Zeros();
 
 		dl_tensor* output_data = output->GetData();

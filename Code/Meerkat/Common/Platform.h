@@ -23,7 +23,8 @@ namespace DeepLearning
 
 #define DL_CPU_ALLOC(s) malloc(s)
 
-#define DL_SAFE_DELETE(p) delete p; \
+#define DL_SAFE_DELETE(p) if (p)	  \
+							delete p; \
 						  p = nullptr;
 
 	enum ComputeType

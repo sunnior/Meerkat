@@ -11,6 +11,7 @@ namespace DeepLearning
 	{
 	public:
 		Model(ComputeType type, bool if_train);
+		~Model();
 
 		void CreateLayer(const char* class_name, const char* layer_name, ...);
 
@@ -23,6 +24,8 @@ namespace DeepLearning
 
 		void Forward();
 		void Backward();
+
+		void ClearState();
 
 		Tensor* GetInputData() { return m_begin_linker->GetData(); }
 		Tensor* GetOutputData() { return m_end_linker->GetInput()->GetData(); }

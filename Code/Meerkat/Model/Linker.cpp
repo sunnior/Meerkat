@@ -9,15 +9,25 @@ namespace DeepLearning
 	{
 	}
 
+	Linker::~Linker()
+	{
+		DL_SAFE_DELETE(m_data);
+		DL_SAFE_DELETE(m_grad_data);
+		DL_SAFE_DELETE(m_layer);
+	}
+
 	void Linker::ForwardRecurrent()
 	{
 		if (m_input_linker->IsForwardReady() == false)
 		{
 			m_input_linker->ForwardRecurrent();
 		}
-
-		m_layer->Forward(m_input_linker->GetData(), m_data);
-		SetForwardReady(true);
+		
+		if (m_layer)
+		{
+			m_layer->Forward(m_input_linker->GetData(), m_data);
+			SetForwardReady(true);
+		}
 	}
 
 	void Linker::BackwardRecurrent()
@@ -26,9 +36,18 @@ namespace DeepLearning
 		{
 			m_output_linker->BackwardRecurrent();
 		}
+		
+		if (m_layer)
+		{
+			m_layer->Backward(m_input_linker->GetData(), m_output_linker->GetGradData(), m_grad_data);
+			SetBackwardReady(true);
+		}
+	}
 
-		m_layer->Backward(m_input_linker->GetData(), m_output_linker->GetGradData(), m_grad_data);
-		SetBackwardReady(true);
+	void Linker::ClearState()
+	{
+		SetBackwardReady(false);
+		SetForwardReady(false);
 	}
 
 	void Linker::CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape)
@@ -64,4 +83,5 @@ namespace DeepLearning
 	{
 		m_layer->GetLearnableParam(params, param_grads);
 	}
+
 }
