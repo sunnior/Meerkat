@@ -43,6 +43,12 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Model\Model.h">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_stl.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -78,6 +84,9 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Model\Model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Layers">
@@ -94,6 +103,9 @@
     </Filter>
     <Filter Include="Model">
       <UniqueIdentifier>{44523c9a-7e80-4aff-88b7-df93daf37adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{7e765488-8d53-4deb-9671-1a1e6b9df7a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
