@@ -1,7 +1,5 @@
 #include "MnistDB.h"
 #include "Common/Meerkat.h"
-#include "Layers/LinearLayer.h"
-#include "Layers/LogSoftMaxLayer.h"
 #include "Optimizer/SgdOptimizer.h"
 #include "Criterions/ClassNllCriterion.h"
 #include "Model/Model.h"
@@ -14,7 +12,18 @@ int main()
 	const char* train_image_file_path = "train-images.idx3-ubyte";
 	const char* train_label_file_path = "train-labels.idx1-ubyte";
 
-	DeepLearning::Init();
+	DeepLearning::Initialize();
+
+	FILE* pJsonFile = fopen("model.json", "rb");
+	fseek(pJsonFile, 0, SEEK_END);
+	size_t file_size = ftell(pJsonFile);
+	char* json_buffer = (char*)malloc(file_size + 1);
+	fseek(pJsonFile, 0, SEEK_SET);
+	fread(json_buffer, 1, file_size, pJsonFile);
+	json_buffer[file_size] = 0;
+	rapidjson::Document doc;
+	doc.Parse(json_buffer);
+	free(json_buffer);
 
 	MnistDB train_db(train_image_file_path, train_label_file_path);
 
@@ -26,11 +35,12 @@ int main()
 	Tensor* label = DL_NEW(Tensor)(ComputeType_CPU, { batch_size, 1 });
 
 	Model* model = DL_NEW(Model)(ComputeType_CPU);
-	model->CreateLayer("layer_linear", "linear", rows*columns, labels);
-	model->CreateLayer("layer_logsoftmax", "logsoftmax");
-	model->LinkBegin("linear");
-	model->LinkEnd("logsoftmax");
-	model->Link("linear", "logsoftmax");
+	model->Deserialize(doc);
+	rapidjson::StringBuffer sb;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(sb);
+	
+	model->Serialize(writer);
+	const char* json = sb.GetString();
 
 	model->CreateData(batch_size, { rows*columns }, true);
 	Tensor* data = model->GetInputData();
@@ -59,6 +69,8 @@ int main()
 	DL_SAFE_DELETE(model);
 	DL_SAFE_DELETE(optimizer);
 	DL_SAFE_DELETE(criterion);
+
+	DeepLearning::Finalize();
 
 	return 0;
 }

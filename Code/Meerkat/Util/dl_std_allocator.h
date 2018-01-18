@@ -88,6 +88,11 @@ namespace DeepLearning
 		{    // estimate maximum array size
 			return ((size_t)(-1) / sizeof(T));
 		}
+
+		bool operator == (const dl_std_allocator<T>&) const
+		{
+			return true;
+		}
 	};
 
 }

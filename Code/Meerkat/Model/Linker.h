@@ -10,6 +10,7 @@ namespace DeepLearning
 
 	class Linker
 	{
+		friend class Model;
 	public:
 		Linker(ComputeType type, Layer* layer = nullptr);
 		~Linker();
@@ -35,11 +36,16 @@ namespace DeepLearning
 		Tensor* GetData() { return m_data; }
 		Tensor* GetGradData() { return m_grad_data; }
 
+		Layer* GetLayer() { return m_layer; }
+		const dl_string& GetName() { return m_name; }
+		void SetName(const dl_string& name) { m_name = name; }
+
 		void Optimize(class Optimizer* opti);
 
 	private:
 
 		ComputeType m_type;
+		dl_string m_name;
 		Layer* m_layer{ nullptr };
 		bool   m_is_forward_ready{ false };
 		bool   m_is_backward_ready{ false };

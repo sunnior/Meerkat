@@ -7,6 +7,8 @@ namespace DeepLearning
 {
 	class LinearLayer : public Layer
 	{
+		DL_REFL_DECLARE(LinearLayer);
+
 	public:
 		LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num);
 
@@ -21,6 +23,8 @@ namespace DeepLearning
 		void CreateTrainData(dl_uint32 batch_size) override;
 
 	private:
+		void _Init(dl_uint32 input_num, dl_uint32 output_num);
+
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;
 

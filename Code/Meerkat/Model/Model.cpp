@@ -1,6 +1,5 @@
 #include "Model.h"
-#include "Reflection/Reflection.h"
-#include <cstdarg>
+#include "Layers/Layer.h"
 
 namespace DeepLearning
 {
@@ -23,15 +22,6 @@ namespace DeepLearning
 		m_linkers.clear();
 		DL_SAFE_DELETE(m_begin_linker);
 		DL_SAFE_DELETE(m_end_linker);
-	}
-
-	void Model::CreateLayer(const char* class_name, const char* layer_name, ...)
-	{
-		va_list vl;
-		va_start(vl, layer_name);
-		Layer* layer = Reflection::CreateLayer(class_name, m_type, vl);
-		Linker* linker = DL_NEW(Linker)(m_type, layer);
-		m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_name), linker));
 	}
 
 	void Model::Link(const char* input_name, const char* output_name)
@@ -88,6 +78,76 @@ namespace DeepLearning
 		{
 			it.second->Optimize(opti);
 		}
+	}
+
+	void Model::Deserialize(const rapidjson::Document& doc)
+	{
+		const rapidjson::Value& layer_arr = doc["layers"];
+		dl_uint32 layer_num = layer_arr.Size();
+		for (dl_uint32 i = 0; i < layer_num; ++i)
+		{
+			const rapidjson::Value& layer_json = layer_arr[i];
+			Layer* layer = ReflectionManager::GetInstance()->CreateLayer(m_type, layer_json);
+			Linker* linker = DL_NEW(Linker)(m_type, layer);
+			linker->SetName(dl_string(layer_json["name"].GetString()));
+			m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_json["name"].GetString()), linker));
+		}
+
+		const rapidjson::Value& links = doc["links"];
+		LinkBegin(links["begin"].GetString());
+		LinkEnd(links["end"].GetString());
+		const rapidjson::Value& links_internal = links["internal"];
+
+		dl_uint32 link_num = links_internal.Size();
+		for (dl_uint32 i = 0; i < link_num; ++i)
+		{
+			Link(links_internal[i][0].GetString(), links_internal[i][1].GetString());
+		}
+	}
+
+	void Model::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
+	{
+		writer.StartObject(); {
+			writer.Key("layers");
+			writer.StartArray(); {
+				for (auto& it : m_linkers)
+				{
+					writer.StartObject();
+					Layer* layer = it.second->GetLayer();
+					writer.Key("type");
+					writer.String(layer->GetTypeName());
+					writer.Key("name");
+					writer.String(it.first.c_str());
+					layer->ToJson(writer);
+					writer.EndObject();
+				}
+			} writer.EndArray();
+
+			writer.Key("links");
+			writer.StartObject(); {
+				writer.Key("begin");
+				writer.String(m_begin_linker->GetOutput()->GetLayer()->GetTypeName());
+				writer.Key("end");
+				writer.String(m_end_linker->GetInput()->GetLayer()->GetTypeName());
+				writer.Key("internal");
+				writer.StartArray(); {
+					for (auto& it : m_linkers)
+					{
+						Linker* linker_begin = it.second;
+						Linker* linker_end = linker_begin->GetOutput();
+						if (linker_end->GetLayer())
+						{
+							writer.StartArray(); {
+								writer.String(linker_begin->GetName().c_str());
+								writer.String(linker_end->GetName().c_str());
+							} writer.EndArray();
+						}
+					}
+				}; writer.EndArray();
+
+			}; writer.EndObject();
+
+		};  writer.EndObject();
 	}
 
 }

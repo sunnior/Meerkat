@@ -15,6 +15,11 @@ namespace DeepLearning
 		m_tensors.clear();
 	}
 
+	void Layer::ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
+	{
+
+	}
+
 	void Layer::Optimize(class Optimizer* opti)
 	{
 		dl_vector<::std::pair<Tensor*, Tensor*>> params;
@@ -25,6 +30,8 @@ namespace DeepLearning
 	Tensor* Layer::_CreateTensor(const dl_tensor_shape& shape)
 	{
 		Tensor* tensor = DL_NEW(Tensor)(m_type, shape);
+		m_tensors.push_back(tensor);
+
 		tensor->Zeros();
 		return tensor;
 	}

@@ -1,10 +1,17 @@
 #include "Meerkat.h"
 #include "Blas.h"
+#include "Reflection/Reflection.h"
 
 namespace DeepLearning
 {
-	void Init()
+	void Initialize()
 	{
 		InitBlas();
+		ReflectionManager::Initialize();
+	}
+
+	void Finalize()
+	{
+		ReflectionManager::Finalize();
 	}
 }

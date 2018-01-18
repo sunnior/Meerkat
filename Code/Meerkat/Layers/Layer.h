@@ -4,11 +4,13 @@
 #include "Common/Platform.h"
 #include "Common/Tensor.h"
 #include "Util/dl_stl.h"
+#include "Reflection/Reflection.h"
 
 namespace DeepLearning
 {
 	class Layer
 	{
+		DL_REFL_DECLARE(Layer);
 	public:
 		Layer(ComputeType type)
 			: m_type(type)

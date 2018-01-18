@@ -52,6 +52,9 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Reflection\Reflection.h">
       <Filter>Reflection</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\RuntimeType.h">
+      <Filter>Reflection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">

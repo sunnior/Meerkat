@@ -7,6 +7,7 @@ namespace DeepLearning
 {
 	class LogSoftMaxLayer : public Layer
 	{
+		DL_REFL_DECLARE(LogSoftMaxLayer);
 	public:
 		LogSoftMaxLayer(ComputeType type)
 			: Layer(type)

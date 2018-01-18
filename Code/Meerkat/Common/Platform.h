@@ -33,4 +33,8 @@ namespace DeepLearning
 		ComputeType_GPU,
 	};
 }
+
+#define FORCE_LINK_THIS_LAYER(x) int force_link_layer_##x = 0;
+#define FORCE_LINK_THAT_LAYER(x) { extern int force_link_layer_##x; force_link_layer_##x = 1; }
+
 #endif

@@ -7,24 +7,63 @@
 
 namespace DeepLearning
 {
-	Layer* Reflection::CreateLayer(const char* name, ComputeType type, va_list vl)
+	RuntimeTypeBase::RuntimeTypeBase(const char* type_name)
+		: m_type_name(type_name)
 	{
-		TODO("a real reflection system!");
-		Layer* layer = nullptr;
-		if (std::strcmp(name, "layer_logsoftmax") == 0)
-		{
-			layer = DL_NEW(LogSoftMaxLayer)(type);
-		}
-
-		else if (std::strcmp(name, "layer_linear") == 0)
-		{
-			dl_uint32 input_size = va_arg(vl, dl_uint32);
-			dl_uint32 output_size = va_arg(vl, dl_uint32);
-
-			layer = DL_NEW(LinearLayer)(type, input_size, output_size);
-		}
-
-		va_end(vl);
-		return layer;
+		ReflectionManager::AddRawType(this);
 	}
+
+	ReflectionManager* ReflectionManager::s_instance = nullptr;
+	RuntimeTypeBase ReflectionManager::s_raw_header;
+
+	static void SupidForceLink()
+	{
+		FORCE_LINK_THAT_LAYER(LinearLayer);
+		FORCE_LINK_THAT_LAYER(LogSoftMaxLayer);
+	}
+
+	void ReflectionManager::Initialize()
+	{
+		s_instance = DL_NEW(ReflectionManager);
+	}
+
+	void ReflectionManager::Finalize()
+	{
+		DL_SAFE_DELETE(s_instance);
+	}
+
+	void ReflectionManager::AddRawType(RuntimeTypeBase* type)
+	{
+		type->m_next = s_raw_header.m_next;
+		s_raw_header.m_next = type;
+	}
+
+	ReflectionManager::ReflectionManager()
+	{
+		SupidForceLink();
+
+		RuntimeTypeBase* base = s_raw_header.m_next;
+		while (base != &s_raw_header)
+		{
+			m_constructors.insert(::std::pair<dl_string, const RuntimeTypeBase*>(base->m_type_name, base));
+			base = base->m_next;
+		}
+	}
+
+	ReflectionManager::~ReflectionManager()
+	{
+
+	}
+
+	Layer* ReflectionManager::CreateLayer(ComputeType type, const rapidjson::Value& layer_json) const
+	{
+		return _FindConstructor(layer_json["type"].GetString()).CreateLayer(type, layer_json);
+	}
+
+	const RuntimeTypeBase& ReflectionManager::_FindConstructor(const char* type_name) const
+	{
+		return *(m_constructors.find(type_name)->second);
+	}
+
+
 }

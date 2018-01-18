@@ -89,6 +89,7 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\Optimizer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Reflection\Reflection.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\RuntimeType.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_stl.h" />
   </ItemGroup>

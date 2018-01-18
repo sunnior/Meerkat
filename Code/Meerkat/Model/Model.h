@@ -3,6 +3,7 @@
 
 #include "Util/dl_stl.h"
 #include "Common/Tensor.h"
+#include "Reflection/Reflection.h"
 #include "Linker.h"
 
 namespace DeepLearning
@@ -35,6 +36,10 @@ namespace DeepLearning
 	public:
 		void Optimize(class Optimizer* opti);
 
+	public:
+		void Deserialize(const rapidjson::Document& doc);
+		void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer);
+			
 	private:
 
 		ComputeType m_type;

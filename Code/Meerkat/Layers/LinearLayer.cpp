@@ -3,8 +3,32 @@
 
 namespace DeepLearning
 {
+	DL_REFL_IMPLEMENT(LinearLayer, "layer_linear");
+
+	LinearLayer::LinearLayer(ComputeType type, const rapidjson::Value& layer_json)
+		: Layer(type)
+	{
+		dl_uint32 input_num = layer_json["input"].GetInt();
+		dl_uint32 output_num = layer_json["output"].GetInt();
+
+		_Init(input_num, output_num);
+	}
+
+	void LinearLayer::ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
+	{
+		writer.Key("input");
+		writer.Uint(m_weight->GetShape(0));
+		writer.Key("output");
+		writer.Uint(m_bias->GetShape(0));
+	}
+
 	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
 		: Layer(type)
+	{
+		_Init(input_num, output_num);
+	}
+
+	void LinearLayer::_Init(dl_uint32 input_num, dl_uint32 output_num)
 	{
 		m_weight = _CreateTensor({ input_num, output_num });
 		m_bias = _CreateTensor({ output_num });
@@ -54,32 +78,32 @@ namespace DeepLearning
 
 	}
 
-/*
-	void LinearLayer::_BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)
-	{
-		dl_uint32 batch_size = input->GetShape(0);
-		dl_uint32 weight_size = m_weight->GetShape(0);
-		dl_uint32 bias_size = m_bias->GetShape(0);
+	/*
+		void LinearLayer::_BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)
+		{
+			dl_uint32 batch_size = input->GetShape(0);
+			dl_uint32 weight_size = m_weight->GetShape(0);
+			dl_uint32 bias_size = m_bias->GetShape(0);
 
-		_CreateGradParam(batch_size);
+			_CreateGradParam(batch_size);
 
-		const dl_tensor* input_data = input->GetData();
-		const dl_tensor* grad_input_data = grad_input->GetData();
-		const dl_tensor* weight_data = m_weight->GetData();
-		dl_tensor* grad_weight = m_grad_weight->GetData();
+			const dl_tensor* input_data = input->GetData();
+			const dl_tensor* grad_input_data = grad_input->GetData();
+			const dl_tensor* weight_data = m_weight->GetData();
+			dl_tensor* grad_weight = m_grad_weight->GetData();
 
-		const dl_tensor* bias_multi_data = m_bias_multi->GetData();
-		dl_tensor* grad_bias_data = m_grad_bias->GetData();
+			const dl_tensor* bias_multi_data = m_bias_multi->GetData();
+			dl_tensor* grad_bias_data = m_grad_bias->GetData();
 
-		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasTrans, CblasNoTrans, weight_size, bias_size, batch_size, (dl_tensor)1.0f, input_data, grad_input_data, (dl_tensor)1.0f, grad_weight);
-		dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasNoTrans, 1, bias_size, batch_size, (dl_tensor)1.0f, bias_multi_data, grad_input_data, 1.0f, grad_bias_data);
-	
-		if (grad_output) {
-			dl_tensor* grad_output_data = grad_output->GetData();
-			dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans, batch_size, weight_size, bias_size, (dl_tensor)1.0f, grad_input_data, weight_data, (dl_tensor)0.0f, grad_output_data);
+			dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasTrans, CblasNoTrans, weight_size, bias_size, batch_size, (dl_tensor)1.0f, input_data, grad_input_data, (dl_tensor)1.0f, grad_weight);
+			dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasNoTrans, 1, bias_size, batch_size, (dl_tensor)1.0f, bias_multi_data, grad_input_data, 1.0f, grad_bias_data);
+
+			if (grad_output) {
+				dl_tensor* grad_output_data = grad_output->GetData();
+				dl_gemm_cpu<dl_tensor>(CblasRowMajor, CblasNoTrans, CblasTrans, batch_size, weight_size, bias_size, (dl_tensor)1.0f, grad_input_data, weight_data, (dl_tensor)0.0f, grad_output_data);
+			}
 		}
-	}
-*/
+	*/
 
 	void LinearLayer::_BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)
 	{
@@ -135,7 +159,7 @@ namespace DeepLearning
 
 	void LinearLayer::_BackwardGpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output)
 	{
-		
+
 	}
 
 

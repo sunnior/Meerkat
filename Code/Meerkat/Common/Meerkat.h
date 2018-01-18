@@ -3,7 +3,8 @@
 
 namespace DeepLearning
 {
-	void Init();
+	void Initialize();
+	void Finalize();
 }
 
 #endif
