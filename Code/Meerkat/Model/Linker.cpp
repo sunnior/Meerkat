@@ -25,7 +25,7 @@ namespace DeepLearning
 		
 		if (m_layer)
 		{
-			m_layer->Forward(m_input_linker->GetData(), m_data);
+			m_layer->Forward(m_input_linker->m_data, m_data);
 			SetForwardReady(true);
 		}
 	}
@@ -39,7 +39,7 @@ namespace DeepLearning
 		
 		if (m_layer)
 		{
-			m_layer->Backward(m_input_linker->GetData(), m_output_linker->GetGradData(), m_grad_data);
+			m_layer->Backward(m_input_linker->m_data, m_output_linker->m_grad_data, m_grad_data);
 			SetBackwardReady(true);
 		}
 	}
@@ -59,11 +59,11 @@ namespace DeepLearning
 
 	void Linker::CreateDataRecurrent(dl_uint32 batch_size, bool if_train)
 	{
-		Tensor* input_data = m_input_linker->GetData();
+		Tensor* input_data = m_input_linker->m_data;
 		if (input_data == nullptr)
 		{
 			m_input_linker->CreateDataRecurrent(batch_size, if_train);
-			input_data = m_input_linker->GetData();
+			input_data = m_input_linker->m_data;
 		}
 
 		const dl_tensor_shape& input_shape = input_data->GetShape();

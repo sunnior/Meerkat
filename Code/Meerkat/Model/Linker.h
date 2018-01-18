@@ -24,21 +24,8 @@ namespace DeepLearning
 		bool IsBackwardReady() { return m_is_backward_ready; }
 		void SetBackwardReady(bool flag) { m_is_backward_ready = flag; }
 
-		void SetInput(Linker* linker) { m_input_linker = linker; }
-		Linker* GetInput() { return m_input_linker; }
-
-		void SetOutput(Linker* linker) { m_output_linker = linker; }
-		Linker* GetOutput() { return m_output_linker; }
-
 		void CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape);
 		void CreateDataRecurrent(dl_uint32 batch_size, bool if_train);
-
-		Tensor* GetData() { return m_data; }
-		Tensor* GetGradData() { return m_grad_data; }
-
-		Layer* GetLayer() { return m_layer; }
-		const dl_string& GetName() { return m_name; }
-		void SetName(const dl_string& name) { m_name = name; }
 
 		void Optimize(class Optimizer* opti);
 

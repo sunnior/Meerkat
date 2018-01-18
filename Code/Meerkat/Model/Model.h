@@ -1,7 +1,6 @@
 #ifndef __MEERKAT_MODEL_H__
 #define __MEERKAT_MODEL_H__
 
-#include "Util/dl_stl.h"
 #include "Common/Tensor.h"
 #include "Reflection/Reflection.h"
 #include "Linker.h"
@@ -28,9 +27,9 @@ namespace DeepLearning
 
 		void ClearState();
 
-		Tensor* GetInputData() { return m_begin_linker->GetData(); }
-		Tensor* GetOutputData() { return m_end_linker->GetInput()->GetData(); }
-		Tensor* GetOutputGradData() { return m_end_linker->GetGradData(); }
+		Tensor* GetInputData() { return m_begin_linker->m_data; }
+		Tensor* GetOutputData() { return m_end_linker->m_input_linker->m_data; }
+		Tensor* GetOutputGradData() { return m_end_linker->m_grad_data; }
 
 
 	public:

@@ -2,7 +2,6 @@
 #define __MEERKAT_PLATFORM_H__
 
 #include <stdlib.h>
-#include <cstring>
 
 namespace DeepLearning
 {

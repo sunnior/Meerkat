@@ -3,7 +3,6 @@
 
 #include "Common/Platform.h"
 #include "Common/Tensor.h"
-#include "Util/dl_stl.h"
 #include "Reflection/Reflection.h"
 
 namespace DeepLearning

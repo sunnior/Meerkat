@@ -2,7 +2,6 @@
 #define __MEERKAT_RUNTIME_TYPE_H__
 
 #include "Common/Platform.h"
-#include "Util/rapidjson/document.h"
 
 namespace DeepLearning
 {

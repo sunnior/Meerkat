@@ -29,22 +29,22 @@ namespace DeepLearning
 		Linker* input = m_linkers.find(input_name)->second;
 		Linker* output = m_linkers.find(output_name)->second;
 
-		input->SetOutput(output);
-		output->SetInput(input);
+		input->m_output_linker = output;
+		output->m_input_linker = input;
 	}
 
 	void Model::LinkBegin(const char* name)
 	{
 		Linker* linker = m_linkers.find(name)->second;
-		m_begin_linker->SetOutput(linker);
-		linker->SetInput(m_begin_linker);
+		m_begin_linker->m_output_linker = linker;
+		linker->m_input_linker = m_begin_linker;
 	}
 
 	void Model::LinkEnd(const char* name)
 	{
 		Linker* linker = m_linkers.find(name)->second;
-		m_end_linker->SetInput(linker);
-		linker->SetOutput(m_end_linker);
+		m_end_linker->m_input_linker = linker;
+		linker->m_output_linker = m_end_linker;
 	}
 
 	void Model::CreateData(dl_uint32 batch_size, const dl_tensor_shape& data_shape, bool if_train)
@@ -90,7 +90,7 @@ namespace DeepLearning
 			Layer* layer = ReflectionManager::GetInstance()->CreateLayer(layer_json["type"].GetString());
 			layer->FromJson(layer_json);
 			Linker* linker = DL_NEW(Linker)(m_type, layer);
-			linker->SetName(dl_string(layer_json["name"].GetString()));
+			linker->m_name = dl_string(layer_json["name"].GetString());
 			m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_json["name"].GetString()), linker));
 		}
 
@@ -114,7 +114,7 @@ namespace DeepLearning
 				for (auto& it : m_linkers)
 				{
 					writer.StartObject();
-					Layer* layer = it.second->GetLayer();
+					Layer* layer = it.second->m_layer;
 					writer.Key("type");
 					writer.String(layer->GetTypeName());
 					writer.Key("name");
@@ -127,20 +127,20 @@ namespace DeepLearning
 			writer.Key("links");
 			writer.StartObject(); {
 				writer.Key("begin");
-				writer.String(m_begin_linker->GetOutput()->GetLayer()->GetTypeName());
+				writer.String(m_begin_linker->m_output_linker->m_layer->GetTypeName());
 				writer.Key("end");
-				writer.String(m_end_linker->GetInput()->GetLayer()->GetTypeName());
+				writer.String(m_end_linker->m_input_linker->m_layer->GetTypeName());
 				writer.Key("internal");
 				writer.StartArray(); {
 					for (auto& it : m_linkers)
 					{
 						Linker* linker_begin = it.second;
-						Linker* linker_end = linker_begin->GetOutput();
-						if (linker_end->GetLayer())
+						Linker* linker_end = linker_begin->m_output_linker;
+						if (linker_end->m_layer)
 						{
 							writer.StartArray(); {
-								writer.String(linker_begin->GetName().c_str());
-								writer.String(linker_end->GetName().c_str());
+								writer.String(linker_begin->m_name.c_str());
+								writer.String(linker_end->m_name.c_str());
 							} writer.EndArray();
 						}
 					}
