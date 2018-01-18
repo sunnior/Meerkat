@@ -87,7 +87,8 @@ namespace DeepLearning
 		for (dl_uint32 i = 0; i < layer_num; ++i)
 		{
 			const rapidjson::Value& layer_json = layer_arr[i];
-			Layer* layer = ReflectionManager::GetInstance()->CreateLayer(m_type, layer_json);
+			Layer* layer = ReflectionManager::GetInstance()->CreateLayer(layer_json["type"].GetString());
+			layer->FromJson(layer_json);
 			Linker* linker = DL_NEW(Linker)(m_type, layer);
 			linker->SetName(dl_string(layer_json["name"].GetString()));
 			m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_json["name"].GetString()), linker));

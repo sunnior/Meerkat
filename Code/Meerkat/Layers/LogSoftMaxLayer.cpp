@@ -5,10 +5,8 @@
 namespace DeepLearning
 {
 	DL_REFL_IMPLEMENT(LogSoftMaxLayer, "layer_logsoftmax");
-	LogSoftMaxLayer::LogSoftMaxLayer(ComputeType type, const rapidjson::Value& layer_json)
-		: Layer(type)
+	void LogSoftMaxLayer::FromJson(const rapidjson::Value& layer_json)
 	{
-
 	}
 
 	void LogSoftMaxLayer::ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)

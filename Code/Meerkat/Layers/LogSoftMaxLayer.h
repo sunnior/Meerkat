@@ -9,9 +9,6 @@ namespace DeepLearning
 	{
 		DL_REFL_DECLARE(LogSoftMaxLayer);
 	public:
-		LogSoftMaxLayer(ComputeType type)
-			: Layer(type)
-		{};
 
 		dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) override
 		{

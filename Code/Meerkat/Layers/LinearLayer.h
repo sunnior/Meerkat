@@ -10,7 +10,13 @@ namespace DeepLearning
 		DL_REFL_DECLARE(LinearLayer);
 
 	public:
-		LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num);
+		LinearLayer() {};
+
+		LinearLayer(dl_uint32 input_num, dl_uint32 output_num)
+			: m_input_num(input_num)
+			, m_output_num(output_num)
+		{
+		};
 
 		Tensor* GetWeight() { return m_weight; }
 		Tensor* GetBias() { return m_bias; }
@@ -21,10 +27,8 @@ namespace DeepLearning
 		dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) override;
 
 		void CreateTrainData(dl_uint32 batch_size) override;
-
+	
 	private:
-		void _Init(dl_uint32 input_num, dl_uint32 output_num);
-
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;
 
@@ -32,6 +36,12 @@ namespace DeepLearning
 		void _BackwardCpu(const Tensor* input, const Tensor* grad_input, Tensor* grad_output) override;
 
 		void _GetLearnableTensor(dl_vector<::std::pair<Tensor*, Tensor*>>& params) override;
+		void _CreateData() override;
+
+	private:
+		dl_uint32 m_input_num{ 0 };
+		dl_uint32 m_output_num{ 0 };
+	
 	private:
 		Tensor* m_weight{ nullptr };
 		Tensor* m_bias{ nullptr };

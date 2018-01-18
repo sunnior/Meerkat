@@ -5,38 +5,29 @@ namespace DeepLearning
 {
 	DL_REFL_IMPLEMENT(LinearLayer, "layer_linear");
 
-	LinearLayer::LinearLayer(ComputeType type, const rapidjson::Value& layer_json)
-		: Layer(type)
+	void LinearLayer::FromJson(const rapidjson::Value& layer_json)
 	{
-		dl_uint32 input_num = layer_json["input"].GetInt();
-		dl_uint32 output_num = layer_json["output"].GetInt();
-
-		_Init(input_num, output_num);
+		m_input_num = layer_json["input"].GetInt();
+		m_output_num = layer_json["output"].GetInt();
 	}
 
 	void LinearLayer::ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
 	{
 		writer.Key("input");
-		writer.Uint(m_weight->GetShape(0));
+		writer.Uint(m_input_num);
 		writer.Key("output");
-		writer.Uint(m_bias->GetShape(0));
-	}
-
-	LinearLayer::LinearLayer(ComputeType type, dl_uint32 input_num, dl_uint32 output_num)
-		: Layer(type)
-	{
-		_Init(input_num, output_num);
-	}
-
-	void LinearLayer::_Init(dl_uint32 input_num, dl_uint32 output_num)
-	{
-		m_weight = _CreateTensor({ input_num, output_num });
-		m_bias = _CreateTensor({ output_num });
+		writer.Uint(m_output_num);
 	}
 
 	dl_tensor_shape LinearLayer::GetOutputShape(const dl_tensor_shape& input_shape)
 	{
 		return dl_tensor_shape(m_bias->GetShape());
+	}
+
+	void LinearLayer::_CreateData()
+	{
+		m_weight = _CreateTensor({ m_input_num, m_output_num });
+		m_bias = _CreateTensor({ m_output_num });
 	}
 
 	void LinearLayer::CreateTrainData(dl_uint32 batch_size)

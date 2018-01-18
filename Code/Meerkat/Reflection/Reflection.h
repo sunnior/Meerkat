@@ -27,7 +27,7 @@ namespace DeepLearning
 		ReflectionManager();
 		~ReflectionManager();
 
-		Layer* CreateLayer(ComputeType type, const rapidjson::Value& layer_json) const;
+		Layer* CreateLayer(const char* type_name) const;
 
 	private:
 		const RuntimeTypeBase& _FindConstructor(const char* type_name) const;

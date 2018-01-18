@@ -72,14 +72,16 @@ namespace DeepLearning
 
 		if (m_layer)
 		{
-			dl_tensor_shape output_shape = m_layer->GetOutputShape(shape);
-			output_shape.insert(output_shape.begin(), batch_size);
-			m_data = DL_NEW(Tensor)(m_type, output_shape);
+			m_layer->CreateData(m_type);
 
 			if (if_train)
 			{
 				m_layer->CreateTrainData(batch_size);
 			}
+
+			dl_tensor_shape output_shape = m_layer->GetOutputShape(shape);
+			output_shape.insert(output_shape.begin(), batch_size);
+			m_data = DL_NEW(Tensor)(m_type, output_shape);
 		}
 
 	}

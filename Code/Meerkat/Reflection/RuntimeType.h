@@ -13,7 +13,7 @@ namespace DeepLearning
 
 		RuntimeTypeBase(const char* type_name = nullptr);
 
-		virtual class Layer* CreateLayer(ComputeType type, const rapidjson::Value& layer_json) const { return nullptr; }
+		virtual void* CreateType() const { return nullptr; }
 	};
 
 	template<typename T>
@@ -31,7 +31,7 @@ namespace DeepLearning
 	//currently only for layers.
 #define DL_REFL_DECLARE(class_type)                                                                     \
         public:                                                                                         \
-        class_type(ComputeType type, const rapidjson::Value& layer_json);                               \
+        virtual void FromJson(const rapidjson::Value& layer_json);                               \
         virtual void ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer);                  \
         virtual const char* GetTypeName() { return GetRuntimeType(this)->m_type_name; }
 
@@ -44,9 +44,9 @@ namespace DeepLearning
                 RuntimeTypeBase*& type_base = GetRuntimeType<class_type>(nullptr);                      \
                 type_base = this;                                                                       \
             };                                                                                          \
-            Layer* CreateLayer(ComputeType type, const rapidjson::Value& layer_json) const override     \
+            void* CreateType() const override															\
             {                                                                                           \
-                return DL_NEW(class_type)(type, layer_json);                                            \
+                return DL_NEW(class_type);																\
             }                                                                                           \
         };                                                                                              \
         RuntimeType<class_type> RuntimeType_##class_type;                                               \
