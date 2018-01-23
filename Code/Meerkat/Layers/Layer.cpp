@@ -15,17 +15,6 @@ namespace DeepLearning
 		m_tensors.clear();
 	}
 
-	void Layer::FromJson(const rapidjson::Value& layer_json)
-	{
-
-	}
-
-	void Layer::ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
-	{
-
-	}
-
-
 	void Layer::Optimize(class Optimizer* opti)
 	{
 		dl_vector<::std::pair<Tensor*, Tensor*>> params;

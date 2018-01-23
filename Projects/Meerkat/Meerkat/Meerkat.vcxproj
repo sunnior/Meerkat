@@ -57,6 +57,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -67,6 +68,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(CodeDir)\OpenBlas;$(CodeDir)\Meerkat;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -90,6 +92,8 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Reflection\Reflection.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Reflection\RuntimeType.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\TensorReader.h" />
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\TensorWriter.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.h" />
     <ClInclude Include="..\..\..\Code\Meerkat\Util\dl_stl.h" />
   </ItemGroup>
@@ -106,6 +110,8 @@
     <ClCompile Include="..\..\..\Code\Meerkat\Model\Model.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Optimizer\SgdOptimizer.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Reflection\Reflection.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\TensorReader.cpp" />
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\TensorWriter.cpp" />
     <ClCompile Include="..\..\..\Code\Meerkat\Util\dl_std_allocator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

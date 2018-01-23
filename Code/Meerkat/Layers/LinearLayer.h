@@ -27,7 +27,13 @@ namespace DeepLearning
 		dl_tensor_shape GetOutputShape(const dl_tensor_shape& input_shape) override;
 
 		void CreateTrainData(dl_uint32 batch_size) override;
-	
+	public:
+		void FromJson(const rapidjson::Value& layer_json) override;
+		void ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) override;
+
+		void SerializeData(TensorWriter& writer) override;
+		void DeserializeData(TensorReader& reader) override;
+
 	private:
 		void _ForwardCpu(const Tensor* input, Tensor* output) override;
 		void _ForwardGpu(const Tensor* input, Tensor* output) override;

@@ -3,7 +3,10 @@
 
 #include "Common/Tensor.h"
 #include "Reflection/Reflection.h"
+#include "Reflection/TensorWriter.h"
+#include "Reflection/TensorReader.h"
 #include "Linker.h"
+
 
 namespace DeepLearning
 {
@@ -12,8 +15,6 @@ namespace DeepLearning
 	public:
 		Model(ComputeType type);
 		~Model();
-
-		void CreateLayer(const char* class_name, const char* layer_name, ...);
 
 		void Link(const char* input_name, const char* output_name);
 		void LinkBegin(const char* name);
@@ -39,6 +40,8 @@ namespace DeepLearning
 		void Deserialize(const rapidjson::Document& doc);
 		void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer);
 			
+		void SerializeData(TensorWriter& writer);
+		void DeserializeData(TensorReader& reader);
 	private:
 
 		ComputeType m_type;
@@ -48,6 +51,8 @@ namespace DeepLearning
 		Linker* m_end_linker{ nullptr };
 
 		dl_unordered_map<dl_string, Linker*> m_linkers;
+		//for serialization, keep order.
+		dl_vector<dl_string> m_linker_names;
 	};
 
 }

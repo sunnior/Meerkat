@@ -30,6 +30,19 @@ namespace DeepLearning
 		m_bias = _CreateTensor({ m_output_num });
 	}
 
+	void LinearLayer::SerializeData(TensorWriter& writer)
+		 {
+		writer.Write(m_weight);
+		writer.Write(m_bias);
+		}
+	
+		void LinearLayer::DeserializeData(TensorReader& reader)
+		 {
+		reader.Read(m_weight);
+		reader.Read(m_bias);
+		}
+	
+
 	void LinearLayer::CreateTrainData(dl_uint32 batch_size)
 	{
 		m_grad_weight = _CreateTensor(m_weight->GetShape());

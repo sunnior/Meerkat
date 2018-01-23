@@ -55,6 +55,12 @@
     <ClInclude Include="..\..\..\Code\Meerkat\Reflection\RuntimeType.h">
       <Filter>Reflection</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\TensorWriter.h">
+      <Filter>Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Meerkat\Reflection\TensorReader.h">
+      <Filter>Reflection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Meerkat\Layers\LinearLayer.cpp">
@@ -94,6 +100,12 @@
       <Filter>Util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Meerkat\Reflection\Reflection.cpp">
+      <Filter>Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\TensorWriter.cpp">
+      <Filter>Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Meerkat\Reflection\TensorReader.cpp">
       <Filter>Reflection</Filter>
     </ClCompile>
   </ItemGroup>

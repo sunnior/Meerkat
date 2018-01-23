@@ -30,8 +30,6 @@ namespace DeepLearning
 	//currently only for layers.
 #define DL_REFL_DECLARE(class_type)                                                                     \
         public:                                                                                         \
-        virtual void FromJson(const rapidjson::Value& layer_json);                               \
-        virtual void ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer);                  \
         virtual const char* GetTypeName() { return GetRuntimeType(this)->m_type_name; }
 
 #define DL_REFL_IMPLEMENT(class_type, name)                                                             \

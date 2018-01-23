@@ -43,6 +43,12 @@ int main()
 	const char* json = sb.GetString();
 
 	model->CreateData(batch_size, { rows*columns }, true);
+
+	{
+		TensorReader reader("model.data");
+		model->DeserializeData(reader);
+	}
+
 	Tensor* data = model->GetInputData();
 
 	Optimizer* optimizer = DL_NEW(SgdOptimizer)(ComputeType_CPU);
@@ -63,6 +69,11 @@ int main()
 		model->Backward();
 
 		model->Optimize(optimizer);
+	}
+
+	{
+		TensorWriter writer("model.data");
+		model->SerializeData(writer);
 	}
 
 	DL_SAFE_DELETE(label);

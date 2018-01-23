@@ -91,7 +91,8 @@ namespace DeepLearning
 			layer->FromJson(layer_json);
 			Linker* linker = DL_NEW(Linker)(m_type, layer);
 			linker->m_name = dl_string(layer_json["name"].GetString());
-			m_linkers.insert(::std::pair<dl_string, Linker*>(dl_string(layer_json["name"].GetString()), linker));
+			m_linker_names.push_back(linker->m_name);
+			m_linkers.insert(::std::pair<dl_string, Linker*>(linker->m_name, linker));
 		}
 
 		const rapidjson::Value& links = doc["links"];
@@ -111,14 +112,14 @@ namespace DeepLearning
 		writer.StartObject(); {
 			writer.Key("layers");
 			writer.StartArray(); {
-				for (auto& it : m_linkers)
+				for (auto& it : m_linker_names)
 				{
 					writer.StartObject();
-					Layer* layer = it.second->m_layer;
+					Layer* layer = m_linkers.find(it)->second->m_layer;
 					writer.Key("type");
 					writer.String(layer->GetTypeName());
 					writer.Key("name");
-					writer.String(it.first.c_str());
+					writer.String(it.c_str());
 					layer->ToJson(writer);
 					writer.EndObject();
 				}
@@ -149,6 +150,24 @@ namespace DeepLearning
 			}; writer.EndObject();
 
 		};  writer.EndObject();
+	}
+
+	void Model::SerializeData(TensorWriter& writer)
+	{
+		for (auto& it : m_linker_names)
+		{
+			Layer* layer = m_linkers.find(it)->second->m_layer;
+			layer->SerializeData(writer);
+		}
+	}
+
+	void Model::DeserializeData(TensorReader& reader)
+	{
+		for (auto& it : m_linker_names)
+		{
+			Layer* layer = m_linkers.find(it)->second->m_layer;
+			layer->DeserializeData(reader);
+		}
 	}
 
 }

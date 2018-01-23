@@ -4,12 +4,22 @@
 #include "Common/Platform.h"
 #include "Common/Tensor.h"
 #include "Reflection/Reflection.h"
+#include "Reflection/TensorWriter.h"
+#include "Reflection/TensorReader.h"
 
 namespace DeepLearning
 {
 	class Layer
 	{
 		DL_REFL_DECLARE(Layer);
+	public:
+		public:
+			virtual void FromJson(const rapidjson::Value& layer_json) {};
+			virtual void ToJson(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) {};
+			
+			virtual void SerializeData(TensorWriter& writer) {};
+			virtual void DeserializeData(TensorReader& reader) {};
+
 	public:
 		Layer() {};
 		virtual ~Layer();

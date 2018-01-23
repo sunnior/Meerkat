@@ -3,6 +3,7 @@
 
 int main()
 {
-	DeepLearning::Init();
-	return UnitTest::RunAllTests();
+	DeepLearning::Initialize();
+	UnitTest::RunAllTests();
+	DeepLearning::Finalize();
 }

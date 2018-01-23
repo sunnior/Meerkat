@@ -10,7 +10,7 @@ SUITE(LogSoftMaxLayer)
 	{
 		dl_tensor input_value[2][4] = { { 1, 2, 3, 4 },{ 0.1f, 0.1f, 0.1f, 0.1f } };
 		dl_tensor target_value[2][4] = { { -3.44018969f, -2.44018969f, -1.44018969f, -0.44018969f },{ -1.38629436f, -1.38629436f, -1.38629436f, -1.38629436f } };
-		LogSoftMaxLayer* layer = DL_NEW(LogSoftMaxLayer)(ComputeType_CPU);
+		LogSoftMaxLayer* layer = DL_NEW(LogSoftMaxLayer);
 
 		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
 		Tensor* output = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
@@ -36,7 +36,7 @@ SUITE(LogSoftMaxLayer)
 		dl_tensor grad_input_value[2][4] = { { 0, 0, 0.5, 0 },{ 0.5f, 0, 0, 0 } };
 		dl_tensor grad_output_value[2][4] = { { 0, 0, 0.3815585f, 0 },{ 0.3782023f, 0, 0, 0 } };
 
-		LogSoftMaxLayer* layer = DL_NEW(LogSoftMaxLayer)(ComputeType_CPU);
+		LogSoftMaxLayer* layer = DL_NEW(LogSoftMaxLayer);
 		Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
 		Tensor* grad_input = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
 		Tensor* grad_output = DL_NEW(Tensor)(ComputeType_CPU, { 2, 4 });
