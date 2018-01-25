@@ -5,6 +5,7 @@ using namespace DeepLearning;
 
 int main()
 {
+    //test
 	DeepLearning::Init();
 
 	Tensor* input = DL_NEW(Tensor)(ComputeType_CPU, { 1, 2 });
